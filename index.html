@@ -3,302 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sachin Mishra - Tech Tutorials, Flutter Apps, Online Earning, Prayagraj UP">
-    <meta name="keywords" content="tech tutorials, flutter, online earning, sachin mishra, prayagraj">
-    <title>Sachin Mishra - Tech, Tutorials & Earning | Prayagraj</title>
+    <meta name="description" content="Sachin Mishra - Tech Tutorials, Flutter Apps, Online Earning, Barabanki UP">
+    <meta name="keywords" content="tech tutorials, flutter, online earning, sachin mishra, barabanki">
+    <title>Sachin Mishra - Tech, Tutorials & Earning | Barabanki</title>
 
-    <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319"
-         crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #f0932b;
-        }
+        :root { --primary: #667eea; --secondary: #764ba2; --accent: #f0932b; }
         * { font-family: 'Poppins', sans-serif; }
-        body { 
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-        .navbar { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-        .hero-card { 
-            background: rgba(255,255,255,0.95); 
-            border-radius: 25px; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-        }
-        .ad-placeholder { 
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
-            border: 3px dashed #fdcb6e; 
-            border-radius: 15px; 
-            padding: 25px;
-        }
-        video, .video-container { 
-            border-radius: 20px; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        .visitor-badge { 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .stats-card {
-            background: rgba(255,255,255,0.9);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
+        body { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); min-height: 100vh; padding-top: 80px; }
+        .hero-card, .tool-card { background: rgba(255,255,255,0.95); border-radius: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); backdrop-filter: blur(10px); }
+        .ad-placeholder { background: linear-gradient(45deg, #ffeaa7, #fab1a0); border: 3px dashed #fdcb6e; border-radius: 15px; padding: 15px; text-align: center; }
+        .stats-card { background: rgba(255,255,255,0.9); border-radius: 20px; padding: 20px; transition: 0.3s; }
         .stats-card:hover { transform: translateY(-10px); }
-        footer { background: rgba(0,0,0,0.9); }
     </style>
 </head>
 <body>
 
-<!-- Fixed Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark bg-gradient">
     <div class="container">
-        <a class="navbar-brand fw-bold fs-3" href="#home">
-            <i class="fas fa-laptop-code me-2 text-warning"></i>Sachin Tech
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand fw-bold fs-3" href="#home"><i class="fas fa-laptop-code me-2 text-warning"></i>Sachin Tech</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#videos">Videos</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tools">Smart Tools</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid py-4">
-
-<!-- Hero Section -->
-<section id="home" class="hero-card mx-auto mb-5 p-5" style="max-width: 900px;">
-    <div class="text-center mb-5">
-        <h1 class="display-3 fw-bold mb-3" style="background: linear-gradient(45deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            नमस्ते! <span class="text-warning">सचिन मिश्रा</span>
-        </h1>
-        <p class="lead fs-4 text-muted mb-4">Prayagraj, Uttar Pradesh | Tech Tutorials • Flutter • Online Earning</p>
-
-        <!-- AdSense 1 -->
-        <div class="ad-placeholder mb-4">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9508363485592319"
-                 data-ad-slot="1816346483"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+<div class="container py-4">
+    <section id="home" class="hero-card p-5 mb-5 text-center">
+        <h1 class="display-4 fw-bold mb-3" style="color: var(--secondary);">नमस्ते! सचिन मिश्रा</h1>
+        <p class="lead fs-4 text-muted">Barabanki, Uttar Pradesh | Tech Tutorials • Flutter • Earning</p>
+        
+        <div class="ad-placeholder my-4">
+            <small class="d-block text-muted mb-2">ADVERTISEMENT</small>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9508363485592319" data-ad-slot="1816346483" data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-    </div>
+    </section>
 
-    <!-- Featured Video -->
-    <div class="video-container mb-5">
-        <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Tech Tutorial" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-    </div>
-
-    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 mb-5">
-        <a href="#videos" class="btn btn-success btn-lg px-5 py-3 fs-5">
-            <i class="fab fa-youtube me-2"></i>Watch More Videos
-        </a>
-        <a href="#contact" class="btn btn-outline-light btn-lg px-5 py-3 fs-5">
-            <i class="fas fa-envelope me-2"></i>Contact Me
-        </a>
-    </div>
-
-    <div class="text-center">
-        <p class="h4 mb-1">वीडियो अच्छा लगा तो Like 👍, Share और Comment जरूर करें।</p>
-        <p class="text-muted fs-6">मैं YouTube, Amazon Affiliate और Google AdSense से earning करता हूँ।</p>
-    </div>
-</section>
-
-<!-- Stats & Visitor Counter -->
-<section class="row g-4 mb-5">
-    <div class="col-md-3">
-        <div class="stats-card text-center">
-            <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech"
-                 alt="Visitors" class="visitor-badge img-fluid mb-2">
-            <h5 class="text-primary fw-bold">Total Visitors</h5>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stats-card text-center">
-            <i class="fas fa-video fa-3x text-success mb-3"></i>
-            <h5 class="text-success fw-bold">50+</h5>
-            <p>Videos Published</p>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stats-card text-center">
-            <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
-            <h5 class="text-primary fw-bold">Flutter</h5>
-            <p>App Developer</p>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stats-card text-center">
-            <div class="mb-3" data-gvc-username="sachinmishra" data-gvc-repo="your-repo" data-gvc-count="true"></div>
-            <h5 class="text-warning fw-bold">Today</h5>
-            <p>Live Visitors</p>
-        </div>
-    </div>
-</section>
-
-<!-- About Section -->
-<section id="about" class="row align-items-center mb-5">
-    <div class="col-lg-6 mb-4 mb-lg-0">
-        <h2 class="display-5 fw-bold text-white mb-4">
-            <i class="fas fa-user-graduate me-3 text-accent"></i>मेरे बारे में
-        </h2>
-        <div class="text-white lead">
-            <p>नमस्ते, मैं <strong>सचिन मिश्रा</strong> हूँ। Prayagraj, Uttar Pradesh से।</p>
-            <p>मैं tech-related videos, Flutter app development, gym fitness, religious content और online earning के बारे में honest content बनाता हूँ।</p>
-            <ul class="list-unstyled">
-                <li><i class="fas fa-check-circle text-success me-2"></i>YouTube Creator</li>
-                <li><i class="fas fa-check-circle text-success me-2"></i>Amazon Affiliate</li>
-                <li><i class="fas fa-check-circle text-success me-2"></i>Google AdSense (Approval Pending)</li>
-            </ul>
-            <p class="fw-bold mt-3">Email: <a href="mailto:sachinmishra90@gmail.com" class="text-warning">sachinmishra90@gmail.com</a></p>
-            <p class="text-muted small">Last Updated: March 27, 2026</p>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="ratio ratio-16x9">
-            <video controls width="100%">
-                <source src="demo-video.mp4" type="video/mp4">
-                Your browser doesn't support video.
-            </video>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="mb-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card border-0 shadow-lg p-5">
-                <h3 class="text-center mb-5">
-                    <i class="fas fa-envelope-open-text fa-2x me-3 text-primary"></i>Contact Me
-                </h3>
-                <form action="https://formspree.io/f/xYOUR_FORM_IDx" method="POST" class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" name="name" placeholder="Your Name" required>
-                            <div class="invalid-feedback">Name required</div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-                            <div class="invalid-feedback">Valid email required</div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Your Message..." required></textarea>
-                        <div class="invalid-feedback">Message required</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                        <i class="fas fa-paper-plane me-2"></i>Send Message
-                    </button>
-                </form>
+    <section id="tools" class="mb-5">
+        <h2 class="text-white text-center mb-4"><i class="fas fa-tools me-2"></i>Useful Smart Tools</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="tool-card p-4 h-100">
+                    <h4 class="fw-bold text-success"><i class="fab fa-whatsapp me-2"></i>Direct Chat</h4>
+                    <p class="text-muted small">Bina number save kiye message bhejein.</p>
+                    <input type="text" id="waNumber" class="form-control mb-2" placeholder="91XXXXXXXXXX">
+                    <button onclick="sendWA()" class="btn btn-success w-100">Open Chat</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tool-card p-4 h-100">
+                    <h4 class="fw-bold text-primary"><i class="fas fa-file-invoice me-2"></i>Quick Bio Copy</h4>
+                    <p class="text-muted small">Apna intro generate karein.</p>
+                    <input type="text" id="role" class="form-control mb-2" placeholder="Your Profession (e.g. Flutter Dev)">
+                    <button onclick="copyBio()" class="btn btn-primary w-100">Generate & Copy Bio</button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- AdSense 2 -->
-<section class="text-center mb-5">
-    <div class="ad-placeholder">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9508363485592319"
-             data-ad-slot="1816346483"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-</section>
-
+    <section id="about" class="row align-items-center mb-5">
+        <div class="col-lg-6 text-white">
+            <h2 class="display-6 fw-bold mb-4">मेरे बारे में</h2>
+            <p>नमस्ते, मैं <strong>सचिन मिश्रा</strong> हूँ। मैं <strong>Barabanki, Uttar Pradesh</strong> का रहने वाला हूँ।</p>
+            <p>मैं Flutter Development और Tech Tutorials के जरिए लोगों की मदद करता हूँ। मेरा लक्ष्य सही जानकारी के साथ सबको Online Earning के तरीके सिखाना है।</p>
+        </div>
+        <div class="col-lg-6">
+            <div class="stats-card text-center">
+                <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech" class="img-fluid mb-3">
+                <h5 class="fw-bold">Barabanki's Tech Hub</h5>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-5 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="text-center mb-4">
-                    <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech"
-                         alt="Total Visitors" class="visitor-badge mb-2 img-fluid" style="width: 180px;">
-                    <p class="h5 fw-bold text-white mb-0">Real-time Website Visitors</p>
-                </div>
-            </div>
-            <div class="col-lg-6 text-lg-end text-center">
-                <div class="mb-3">
-                    <a href="#" class="text-warning me-4 fs-4"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="text-primary me-4 fs-4"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-info me-4 fs-4"><i class="fab fa-github"></i></a>
-                    <a href="mailto:sachinmishra90@gmail.com" class="text-success fs-4"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
-        <hr class="my-4">
-        <div class="row">
-            <div class="col-md-6">
-                <p>&copy; 2026 <strong>Sachin Mishra</strong>. Prayagraj, UP.</p>
-            </div>
-            <div class="col-md-6 text-md-end text-center">
-                <p class="mb-0">
-                    <strong>Disclaimer:</strong> As an Amazon Associate, I earn from qualifying purchases.
-                    | Google AdSense Ready | Privacy Policy
-                </p>
-            </div>
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2026 Sachin Mishra | Barabanki, UP</p>
+        <div class="small text-muted">
+            <a href="#" class="text-muted text-decoration-none mx-2">Privacy Policy</a> | 
+            <a href="#" class="text-muted text-decoration-none mx-2">Terms of Use</a> | 
+            <a href="#" class="text-muted text-decoration-none mx-2">Contact</a>
         </div>
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://github-visitor-counter-tau.vercel.app/api.js?username=sachinmishra&repo=sachintech&show=0&count=true"></script>
-
 <script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        });
-    })();
+    function sendWA() {
+        let num = document.getElementById('waNumber').value;
+        if(num) window.open(`https://wa.me/${num}`, '_blank');
+        else alert('Pehle number daalein!');
+    }
+    function copyBio() {
+        let role = document.getElementById('role').value || "Professional";
+        let text = `Hi, I am Sachin Mishra from Barabanki. I am a ${role}. Check my work at Sachin Tech!`;
+        navigator.clipboard.writeText(text);
+        alert('Bio copied to clipboard!');
+    }
 </script>
-
 </body>
 </html>
