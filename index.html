@@ -14,26 +14,21 @@
         * { font-family: 'Space Grotesk', sans-serif; transition: all 0.3s ease; }
         body { background-color: var(--bg); color: #e0e0e0; overflow-x: hidden; }
 
-        /* Smooth UI Elements */
         .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 28px; padding: 30px; }
         .nav-custom { background: rgba(5, 5, 5, 0.8); border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); }
         
-        /* Premium Buttons */
         .btn-premium { background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); color: #000; font-weight: 600; border: none; border-radius: 14px; padding: 12px 28px; }
         .btn-premium:hover { box-shadow: 0 0 20px rgba(0, 242, 254, 0.5); transform: translateY(-2px); }
 
-        /* Dynamic Network Chain */
         .synergy-box { position: relative; padding: 40px; border-radius: 30px; background: radial-gradient(circle at top right, rgba(0, 242, 254, 0.05), transparent); overflow: hidden; }
         .live-dot { height: 8px; width: 8px; background: var(--accent); border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Panels */
         .panel { display: none; opacity: 0; transform: translateY(15px); }
         .panel.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* Tool Specifics */
-        #editor-frame { border-radius: 20px; border: 1px solid var(--border); background: #000; display: flex; align-items: center; justify-content: center; min-height: 350px; }
-        #img-out { max-width: 100%; border-radius: 15px; }
+        /* Viral Link Styling */
+        #share-link-display { background: #000; padding: 12px; border-radius: 12px; font-family: monospace; font-size: 11px; color: var(--accent); word-break: break-all; border: 1px solid var(--border); margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -55,20 +50,17 @@
         <div class="row align-items-center mb-5">
             <div class="col-lg-7">
                 <h1 class="display-3 fw-bold mb-4">Elite <span style="color:var(--accent)">Digital</span> Toolkit.</h1>
-                <p class="lead text-white-50 mb-4">Professional business website deployment aur advanced image processing, ab aapke browser mein.</p>
+                <p class="lead text-white-50 mb-4">Professional image processing aur auto-propagating viral networking, ab aapke control mein.</p>
                 <div class="d-flex gap-3">
                     <button class="btn btn-premium btn-lg" onclick="showTab('lab')">Explore AI Tools</button>
-                    <button class="btn btn-outline-secondary btn-lg rounded-4" onclick="showTab('chain')">Analyze Reach</button>
+                    <button class="btn btn-outline-secondary btn-lg rounded-4" onclick="showTab('chain')">View Network</button>
                 </div>
             </div>
             <div class="col-lg-5 mt-4 mt-lg-0">
-                <div class="glass-card">
-                    <h5><i class="fas fa-chart-line text-info me-2"></i>Live Ecosystem</h5>
-                    <div class="d-flex justify-content-between mt-3 small">
-                        <span>Global Processing</span><span class="text-info">84.2k</span>
-                    </div>
-                    <div class="progress mt-2" style="height: 4px; background: #111;">
-                        <div class="progress-bar bg-info" style="width: 70%"></div>
+                <div class="glass-card text-center">
+                    <span class="live-dot"></span> <small class="text-info">Node Connection: <span id="node-id-display">Direct</span></small>
+                    <div class="progress mt-3" style="height: 4px; background: #111;">
+                        <div class="progress-bar bg-info" style="width: 85%"></div>
                     </div>
                 </div>
             </div>
@@ -82,21 +74,13 @@
                 <input type="file" id="img-in" class="d-none" onchange="loadImg(event)">
                 <button class="btn btn-sm btn-outline-info" onclick="document.getElementById('img-in').click()">Upload Content</button>
             </div>
-            
             <div class="row g-4">
-                <div class="col-lg-8">
-                    <div id="editor-frame">
-                        <p id="placeholder-text" class="text-white-50">Image upload karein...</p>
-                        <img id="img-out">
-                    </div>
-                </div>
+                <div class="col-lg-8"><div id="editor-frame" style="background:#000; min-height:350px; display:flex; align-items:center; justify-content:center; border-radius:20px;"><img id="img-out" style="max-width:100%; border-radius:15px;"></div></div>
                 <div class="col-lg-4">
-                    <div class="p-3 bg-black rounded-4 border border-secondary mb-3">
-                        <h6 class="text-uppercase small fw-bold mb-3 opacity-50">Beauty Enhancements</h6>
+                    <div class="p-3 bg-black rounded-4 border border-secondary">
+                        <h6 class="text-uppercase small fw-bold mb-3 opacity-50">Beauty Retouch</h6>
                         <button class="btn btn-outline-light w-100 mb-2 py-2" onclick="edit('smooth')">✨ Skin Retouch</button>
                         <button class="btn btn-outline-light w-100 mb-2 py-2" onclick="edit('bright')">💡 Luminous Aura</button>
-                        <button class="btn btn-outline-light w-100 mb-2 py-2" onclick="edit('rosy')">🌹 Warm Glow</button>
-                        <hr class="border-secondary">
                         <button class="btn btn-premium w-100 mt-2" onclick="download()">Export HQ 📥</button>
                     </div>
                 </div>
@@ -107,26 +91,17 @@
     <div id="p-chain" class="panel">
         <div class="synergy-box glass-card border-0">
             <div class="text-center">
-                <span class="live-dot"></span><span class="small text-uppercase tracking-widest opacity-50">Synergy Network Active</span>
+                <span class="live-dot"></span><span class="small text-uppercase tracking-widest opacity-50">Viral Loop Active</span>
                 <h2 class="display-5 fw-bold mt-3">Expand Your <span style="color:var(--accent)">Influence</span></h2>
-                <p class="text-white-50">Apne network ko utilize karein aur organic growth dekhein.</p>
+                <p class="text-white-50">Aapki encoded link har naye user par mutate hokar viral chain banayegi.</p>
             </div>
             
-            <div class="row mt-5 g-4 text-center">
-                <div class="col-md-4">
-                    <div class="p-4 bg-black rounded-4 border border-secondary">
-                        <h2 class="fw-bold" id="conn-count">1</h2>
-                        <small class="opacity-50">Your Direct Impact</small>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="p-4 bg-black rounded-4 border border-secondary h-100 d-flex flex-column justify-content-center">
-                        <button class="btn btn-premium mb-2" onclick="propagate('messenger')">
-                            <i class="fab fa-facebook-messenger me-2"></i> Send to Inner Circle
-                        </button>
-                        <p class="small text-white-50 mb-0">Messenger par share karein aur real-time traffic track karein.</p>
-                    </div>
-                </div>
+            <div class="glass-card bg-black border-secondary mt-4">
+                <small class="opacity-50">Unique Encoded DNA Link:</small>
+                <div id="share-link-display">Generating Secret Node...</div>
+                <button class="btn btn-premium w-100 mt-3" onclick="propagate('messenger')">
+                    <i class="fab fa-facebook-messenger me-2"></i> Propagate to Network
+                </button>
             </div>
         </div>
     </div>
@@ -139,40 +114,52 @@
         document.getElementById('p-' + id).classList.add('active');
     }
 
-    // Image Lab logic with refined filters
-    function loadImg(e) {
-        const reader = new FileReader();
-        reader.onload = function(f) {
-            const img = document.getElementById('img-out');
-            img.src = f.target.result;
-            document.getElementById('placeholder-text').style.display = 'none';
+    // --- VIRAL LOOP ENGINE ---
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const ref = params.get('node');
+        if(ref) {
+            sessionStorage.setItem('origin_node', ref);
+            document.getElementById('node-id-display').innerText = "Verified-" + ref.substring(0,6);
         }
-        reader.readAsDataURL(e.target.files[0]);
-    }
+        generateMutatedLink();
+    });
 
-    function edit(type) {
-        const img = document.getElementById('img-out');
-        if(type === 'smooth') img.style.filter = 'blur(0.5px) contrast(1.05) saturate(1.1)';
-        if(type === 'bright') img.style.filter = 'brightness(1.15) contrast(1.02)';
-        if(type === 'rosy') img.style.filter = 'sepia(0.15) saturate(1.4) hue-rotate(-10deg)';
+    function generateMutatedLink() {
+        const salt = Math.random().toString(36).substring(7).toUpperCase();
+        const origin = sessionStorage.getItem('origin_node') || 'ROOT';
+        const dna = btoa(JSON.stringify({o: origin, id: salt, t: Date.now()}));
+        const viralURL = window.location.origin + window.location.pathname + "?node=" + dna;
+        document.getElementById('share-link-display').innerText = viralURL;
+        return viralURL;
     }
 
     function propagate(p) {
-        const url = window.location.href;
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-        
-        // Dynamic counter update simulation
-        let c = parseInt(document.getElementById('conn-count').innerText);
-        document.getElementById('conn-count').innerText = c + 1;
+        const link = generateMutatedLink();
+        navigator.clipboard.writeText(link);
+        const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+        window.open(fbShare, '_blank');
+        alert("Encoded Link Copied! Messenger par paste karein.");
+    }
+
+    // --- IMAGE LAB LOGIC ---
+    function loadImg(e) {
+        const reader = new FileReader();
+        reader.onload = f => document.getElementById('img-out').src = f.target.result;
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+    function edit(t) {
+        const i = document.getElementById('img-out');
+        if(t === 'smooth') i.style.filter = 'blur(0.5px) contrast(1.05)';
+        if(t === 'bright') i.style.filter = 'brightness(1.15)';
     }
 
     function download() {
-        const img = document.getElementById('img-out');
-        if(!img.src) return;
-        const link = document.createElement('a');
-        link.href = img.src;
-        link.download = 'SachinTech_Elite.jpg';
-        link.click();
+        const i = document.getElementById('img-out');
+        if(!i.src) return;
+        const l = document.createElement('a');
+        l.href = i.src; l.download = 'Elite_Export.jpg'; l.click();
     }
 </script>
 
