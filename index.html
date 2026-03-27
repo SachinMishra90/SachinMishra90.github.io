@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sachin Mishra - Tech Tutorials, Flutter Apps, Online Earning, Barabanki UP">
-    <meta name="keywords" content="tech tutorials, flutter, online earning, sachin mishra, barabanki, html editor">
-    <title>Sachin Mishra - Tech & Tools | Barabanki</title>
+    <meta name="description" content="Build Your Own Business Website for Free - GitHub Tutorial by Sachin Mishra">
+    <title>Sachin Tech | Free Business Website Guide</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319" crossorigin="anonymous"></script>
 
@@ -14,162 +13,135 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary: #667eea; --secondary: #764ba2; --accent: #f0932b; }
+        :root { --primary: #24292e; --secondary: #28a745; --accent: #f0932b; }
         * { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); min-height: 100vh; padding-top: 80px; }
-        .hero-card, .tool-card { 
-            background: rgba(255,255,255,0.95); 
-            border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
-            backdrop-filter: blur(10px); 
-            border: none;
-        }
-        .ad-placeholder { 
-            background: #fff3cd; border: 2px dashed #ffc107; border-radius: 10px; padding: 15px; text-align: center; margin: 20px 0;
-        }
-        #htmlInput { font-family: 'Courier New', Courier, monospace; font-size: 14px; resize: none; border-radius: 10px; }
-        #outputFrame { min-height: 300px; border-radius: 10px; background: #fff; padding: 15px; border: 1px solid #ddd; }
-        .nav-link:hover { color: var(--accent) !important; }
-        footer { background: #1a1a1a; color: #ccc; }
+        body { background: #f4f7f6; padding-top: 80px; }
+        
+        .navbar { background: var(--primary) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .hero-section { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1350&q=80'); background-size: cover; color: white; padding: 100px 0; border-radius: 0 0 50px 50px; }
+        
+        .card-custom { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; background: white; }
+
+        /* Advanced Chatbot UI */
+        #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 330px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: white; z-index: 1000; border: 1px solid #ddd; display: none; flex-direction: column; overflow: hidden; }
+        #chat-header { background: var(--primary); color: white; padding: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        #chat-content { height: 350px; overflow-y: auto; padding: 15px; font-size: 14px; background: #fff; }
+        #chat-footer { padding: 12px; background: #f8f9fa; border-top: 1px solid #eee; }
+        
+        .bot-msg { background: #f1f0f0; padding: 10px 14px; border-radius: 15px 15px 15px 0; margin-bottom: 15px; display: inline-block; max-width: 90%; color: #333; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+        .user-btn { background: var(--secondary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; width: 100%; margin-top: 5px; }
+        .user-btn:hover { background: #218838; transform: scale(1.02); }
+        
+        .product-link { display: block; background: #fff; border: 1px solid #28a745; color: #28a745; padding: 8px; border-radius: 8px; text-decoration: none; margin-top: 8px; text-align: center; font-weight: 600; font-size: 13px; }
+        .product-link:hover { background: #28a745; color: white; }
+
+        #chat-launcher { position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4); z-index: 1001; transition: 0.3s; }
+        #chat-launcher:hover { transform: rotate(15deg) scale(1.1); }
+        
+        .ad-slot-container { margin: 15px 0; padding: 5px; background: #fafafa; border: 1px dashed #ccc; border-radius: 10px; text-align: center; font-size: 10px; color: #999; }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#"><i class="fas fa-laptop-code text-warning me-2"></i>SACHIN TECH</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#tools">Smart Tools</a></li>
-                <li class="nav-item"><a class="nav-link" href="#editor">Live Editor</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand fw-bold" href="#"><i class="fas fa-code-branch text-success me-2"></i>SACHIN TECH</a>
     </div>
 </nav>
 
-<div class="container py-4">
+<header class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3">Learn to Create a Professional Business Website for Free</h1>
+        <p class="lead mb-4">Step-by-Step GitHub Tutorial with Interactive Chatbot Guide</p>
+        <button onclick="toggleChat()" class="btn btn-success btn-lg px-5 rounded-pill shadow">Launch Tutorial Bot</button>
+    </div>
+</header>
 
-    <section id="home" class="hero-card p-5 mb-5 text-center">
-        <h1 class="display-4 fw-bold text-dark">नमस्ते! <span style="color:var(--secondary)">सचिन मिश्रा</span></h1>
-        <p class="lead text-muted">Barabanki, Uttar Pradesh | Engineer & Tech Content Creator</p>
-        
-        <div class="ad-placeholder">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9508363485592319" data-ad-slot="1816346483" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <div class="d-flex justify-content-center gap-3">
-            <a href="#tools" class="btn btn-primary btn-lg px-4">Use Tools</a>
-            <a href="mailto:sachinmishra90@gmail.com" class="btn btn-outline-dark btn-lg px-4">Contact Me</a>
-        </div>
-    </section>
-
-    <section id="tools" class="mb-5">
-        <h2 class="text-white text-center mb-4"><i class="fas fa-bolt text-warning me-2"></i>Smart Productivity Tools</h2>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="tool-card p-4 h-100">
-                    <h4 class="fw-bold text-success"><i class="fab fa-whatsapp me-2"></i>Direct WhatsApp</h4>
-                    <p class="text-muted small">Bina number save kiye message bhejein.</p>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">+91</span>
-                        <input type="text" id="waPhone" class="form-control" placeholder="Number daalein">
-                    </div>
-                    <button onclick="sendWhatsApp()" class="btn btn-success w-100">Open WhatsApp</button>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="tool-card p-4 h-100">
-                    <h4 class="fw-bold text-primary"><i class="fas fa-file-word me-2"></i>Quick Text Bio</h4>
-                    <p class="text-muted small">Apna professional intro copy karein.</p>
-                    <select id="bioType" class="form-select mb-3">
-                        <option value="Engineer">Software Engineer Bio</option>
-                        <option value="Creator">Content Creator Bio</option>
-                    </select>
-                    <button onclick="copyMyBio()" class="btn btn-primary w-100">Copy to Clipboard</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="editor" class="mb-5">
-        <div class="hero-card p-4 shadow-lg border-0">
-            <h3 class="fw-bold text-dark mb-3"><i class="fas fa-code text-primary me-2"></i>Live HTML Playground</h3>
-            <p class="text-muted small">Engineer's Corner: Naya code yahan test karein.</p>
-            <div class="row">
-                <div class="col-lg-6 mb-3">
-                    <textarea id="codeArea" class="form-control bg-dark text-white p-3" rows="10" placeholder="<h1>Hello Barabanki!</h1>"></textarea>
-                    <button onclick="updatePreview()" class="btn btn-warning w-100 mt-3 fw-bold">Run Code</button>
-                </div>
-                <div class="col-lg-6">
-                    <div id="outputFrame" class="shadow-inner">Preview yahan dikhega...</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="row align-items-center mb-5 p-4 hero-card mx-1">
-        <div class="col-md-8">
-            <h2 class="fw-bold text-dark">मेरे बारे में (About Me)</h2>
-            <p class="text-muted">मैं <strong>सचिन मिश्रा</strong> हूँ, <strong>Barabanki (UP)</strong> से। एक इंजीनियर होने के नाते मुझे नई चीज़ें बनाना और सिखाना पसंद है।</p>
-            <p>इस वेबसाइट का मकसद developers और आम लोगों के लिए रोज़ाना काम आने वाले tools एक ही जगह पर देना है।</p>
-        </div>
-        <div class="col-md-4 text-center">
-            <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech" class="img-fluid rounded shadow-sm">
-            <p class="small mt-2 text-muted">Trusted by Visitors</p>
-        </div>
-    </section>
-
+<div class="container my-5">
+    <div class="text-center my-4">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9508363485592319" data-ad-slot="1816346483" data-ad-format="auto"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 </div>
 
-<footer class="py-5">
-    <div class="container text-center">
-        <div class="mb-4">
-            <a href="#" class="text-white mx-3 fs-4"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="text-white mx-3 fs-4"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-white mx-3 fs-4"><i class="fab fa-github"></i></a>
-        </div>
-        <p class="mb-1">&copy; 2026 Sachin Mishra | Barabanki, UP</p>
-        <p class="small text-muted">
-            <a href="#" class="text-muted text-decoration-none">Privacy Policy</a> | 
-            <a href="#" class="text-muted text-decoration-none">Terms of Service</a> | 
-            <a href="mailto:sachinmishra90@gmail.com" class="text-muted text-decoration-none">Contact</a>
-        </p>
+<div id="chat-launcher" onclick="toggleChat()"><i class="fas fa-robot"></i></div>
+
+<div id="chatbot-container">
+    <div id="chat-header">
+        <span>Business Web Guide 🚀</span>
+        <i class="fas fa-times" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
-</footer>
+    <div id="chat-content" id="msg-box">
+        <div class="bot-msg">Namaste! Main aapka digital guide hoon. Kya aap apni business website free mein banana seekhna chahte hain?</div>
+    </div>
+    <div id="chat-footer">
+        <button class="user-btn" id="main-action-btn" onclick="tutorialStep(1)">Haan, Shuru karein!</button>
+    </div>
+</div>
 
 <script>
-    // WhatsApp Function
-    function sendWhatsApp() {
-        let num = document.getElementById('waPhone').value;
-        if(num) window.open(`https://wa.me/91${num}`, '_blank');
-        else alert('Pehle number daalein!');
+    const chatContent = document.getElementById('chat-content');
+    const actionBtn = document.getElementById('main-action-btn');
+    
+    // AdSense Config (Yahan apni Slot ID badlein approval ke baad)
+    const myPublisherId = "ca-pub-9508363485592319";
+    const myAdSlotId = "1816346483"; // Approval milne par yahan naya Slot ID daalein
+
+    function toggleChat() {
+        const chat = document.getElementById('chatbot-container');
+        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // Bio Copy Function
-    function copyMyBio() {
-        let type = document.getElementById('bioType').value;
-        let text = type === "Engineer" ? 
-            "Hi, I am Sachin Mishra, an Engineer from Barabanki focused on building smart web solutions." : 
-            "Hi, I am Sachin Mishra, creating tech tutorials and helping people learn online earning.";
-        navigator.clipboard.writeText(text);
-        alert('Bio copied!');
+    function addBotMsg(text) {
+        chatContent.innerHTML += `<div class="bot-msg">${text}</div>`;
+        chatContent.scrollTop = chatContent.scrollHeight;
     }
 
-    // Live Editor Function
-    function updatePreview() {
-        let code = document.getElementById('codeArea').value;
-        let output = document.getElementById('outputFrame');
-        if(code) output.innerHTML = code;
-        else alert('Pehle kuch code likhein!');
+    function insertAdSlot() {
+        // Yeh slot tabhi dikhega jab AdSense approve hoga
+        let adDiv = document.createElement('div');
+        adDiv.className = "ad-slot-container";
+        adDiv.innerHTML = `
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="${myPublisherId}"
+                 data-ad-slot="${myAdSlotId}"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="-gw-3+1f-3d+2z"
+                 data-full-width-responsive="true"></ins>`;
+        chatContent.appendChild(adDiv);
+        try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+    }
+
+    function tutorialStep(step) {
+        if(step === 1) {
+            addBotMsg("<b>Step 1:</b> Sabse pehle <a href='https://github.com' target='_blank'>GitHub.com</a> par account banayein.");
+            actionBtn.innerText = "Account Ban Gaya!";
+            actionBtn.onclick = () => tutorialStep(2);
+        } else if(step === 2) {
+            addBotMsg("<b>Step 2:</b> Ek nayi 'Repository' banayein jiska naam <i>username.github.io</i> ho.");
+            insertAdSlot(); // Ad Slot after Step 2
+            addBotMsg("<b>Tech Recommendation:</b> Business automation projects ke liye ye hardware boards dekhein:");
+            addBotMsg(`<a href="https://www.google.com/search?q=Arduino+Uno+R3" target="_blank" class="product-link">🛒 View Arduino Uno R3</a>`);
+            actionBtn.innerText = "Repository Ban Gayi!";
+            actionBtn.onclick = () => tutorialStep(3);
+        } else if(step === 3) {
+            addBotMsg("<b>Step 3:</b> Apni <i>index.html</i> file upload karein. Website turant live ho jayegi!");
+            insertAdSlot(); // Ad Slot after Step 3
+            addBotMsg("<b>Health Tip:</b> System par baithte waqt fitness ka dhyan rakhein:");
+            addBotMsg(`<a href="https://www.google.com/search?q=Nutrela+Sports+Whey" target="_blank" class="product-link">💪 Nutrela Health Support</a>`);
+            actionBtn.innerText = "Website Live Hai!";
+            actionBtn.onclick = () => tutorialStep(4);
+        } else if(step === 4) {
+            addBotMsg("Zabardast! Ab <b>Search Console</b> mein Sitemap submit karein (jo humne pehle kiya tha).");
+            addBotMsg("Aapka tutorial pura hua! Naye tools ke liye apni email register karein.");
+            document.getElementById('chat-footer').innerHTML = `
+                <input type="email" id="emailInput" class="form-control mb-2" placeholder="Apna Email daalein">
+                <button class="user-btn" onclick="alert('Community Joined!')">Submit</button>`;
+        }
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
