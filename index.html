@@ -6,7 +6,11 @@
     <meta name="description" content="Sachin Mishra - Tech Tutorials, Flutter Apps, Online Earning, Prayagraj UP">
     <meta name="keywords" content="tech tutorials, flutter, online earning, sachin mishra, prayagraj">
     <title>Sachin Mishra - Tech, Tutorials & Earning | Prayagraj</title>
-    
+
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319"
+         crossorigin="anonymous"></script>
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -94,28 +98,28 @@
             नमस्ते! <span class="text-warning">सचिन मिश्रा</span>
         </h1>
         <p class="lead fs-4 text-muted mb-4">Prayagraj, Uttar Pradesh | Tech Tutorials • Flutter • Online Earning</p>
-        
+
         <!-- AdSense 1 -->
         <div class="ad-placeholder mb-4">
-            <i class="fas fa-ad fa-2x mb-2 d-block text-warning"></i>
-            📢 Google AdSense Advertisement यहाँ दिखेगा (Approval के बाद)
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9508363485592319"
+                 data-ad-slot="1816346483"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
     <!-- Featured Video -->
     <div class="video-container mb-5">
-        <!-- YouTube Embed (YOUR_VIDEO_ID बदलो) -->
         <div class="ratio ratio-16x9">
             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Tech Tutorial" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
-        <!-- Local Video Backup -->
-        <!-- <video width="100%" controls poster="thumbnail.jpg">
-            <source src="video.mp4" type="video/mp4">
-            Your browser does not support video.
-        </video> -->
     </div>
 
-    <!-- Call to Action -->
     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 mb-5">
         <a href="#videos" class="btn btn-success btn-lg px-5 py-3 fs-5">
             <i class="fab fa-youtube me-2"></i>Watch More Videos
@@ -135,8 +139,7 @@
 <section class="row g-4 mb-5">
     <div class="col-md-3">
         <div class="stats-card text-center">
-            <!-- Real-time Visitor Counter 1 -->
-            <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech" 
+            <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech"
                  alt="Visitors" class="visitor-badge img-fluid mb-2">
             <h5 class="text-primary fw-bold">Total Visitors</h5>
         </div>
@@ -157,7 +160,6 @@
     </div>
     <div class="col-md-3">
         <div class="stats-card text-center">
-            <!-- GitHub Visitor Counter -->
             <div class="mb-3" data-gvc-username="sachinmishra" data-gvc-repo="your-repo" data-gvc-count="true"></div>
             <h5 class="text-warning fw-bold">Today</h5>
             <p>Live Visitors</p>
@@ -228,8 +230,15 @@
 <!-- AdSense 2 -->
 <section class="text-center mb-5">
     <div class="ad-placeholder">
-        <i class="fas fa-ad fa-3x mb-3 d-block text-success"></i>
-        📢 दूसरा Google AdSense Space (Approval के बाद)
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9508363485592319"
+             data-ad-slot="1816346483"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 </section>
 
@@ -240,9 +249,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <!-- Main Visitor Counter -->
                 <div class="text-center mb-4">
-                    <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech" 
+                    <img src="https://visitor-badge.la.co.la/badge?page_id=sachinmishra.sachintech"
                          alt="Total Visitors" class="visitor-badge mb-2 img-fluid" style="width: 180px;">
                     <p class="h5 fw-bold text-white mb-0">Real-time Website Visitors</p>
                 </div>
@@ -263,7 +271,7 @@
             </div>
             <div class="col-md-6 text-md-end text-center">
                 <p class="mb-0">
-                    <strong>Disclaimer:</strong> As an Amazon Associate, I earn from qualifying purchases. 
+                    <strong>Disclaimer:</strong> As an Amazon Associate, I earn from qualifying purchases.
                     | Google AdSense Ready | Privacy Policy
                 </p>
             </div>
@@ -271,11 +279,9 @@
     </div>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- GitHub Visitor Counter -->
 <script src="https://github-visitor-counter-tau.vercel.app/api.js?username=sachinmishra&repo=sachintech&show=0&count=true"></script>
-<!-- Form Validation -->
+
 <script>
     (function() {
         'use strict';
@@ -292,26 +298,6 @@
             });
         });
     })();
-</script>
-
-<!-- Local Storage Visitor Counter -->
-<script>
-    function updateLocalCounter() {
-        const now = new Date();
-        const today = now.toDateString();
-        let visits = localStorage.getItem('dailyVisits') || '0';
-        if (localStorage.getItem('lastVisitDate') !== today) {
-            visits = '1';
-            localStorage.setItem('lastVisitDate', today);
-        } else {
-            visits = (parseInt(visits) + 1).toString();
-        }
-        localStorage.setItem('dailyVisits', visits);
-        // Update any element with id="today-count"
-        const todayEl = document.getElementById('today-count');
-        if (todayEl) todayEl.textContent = visits;
-    }
-    updateLocalCounter();
 </script>
 
 </body>
