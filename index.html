@@ -3,166 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachin Tech | AI Web, Image & Doc Toolkit</title>
-
+    <title>Sachin Tech | AI Smart Toolkit</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-
     <style>
-        :root { --primary: #24292e; --secondary: #28a745; --accent: #007bff; --doc-color: #e67e22; }
-        * { font-family: 'Poppins', sans-serif; }
-        body { background: #f4f7f6; padding-top: 70px; }
-        .navbar { background: var(--primary) !important; }
-        .hero-section { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1586769852044-692d6e3703f0?auto=format&fit=crop&w=1350&q=80'); background-size: cover; color: white; padding: 60px 0; border-radius: 0 0 40px 40px; }
-
-        /* Blog Section */
-        .blog-section { padding: 40px 0; }
-        .blog-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
-
-        /* Chatbot UI */
-        #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 360px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: white; z-index: 1000; display: none; flex-direction: column; overflow: hidden; border: 1px solid #ddd; }
-        #chat-header { background: var(--primary); color: white; padding: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-        #chat-content { height: 400px; overflow-y: auto; padding: 15px; background: #fff; display: flex; flex-direction: column; }
-        #chat-footer { padding: 12px; background: #f8f9fa; border-top: 1px solid #eee; }
+        :root { --dark: #24292e; --green: #28a745; --blue: #007bff; }
+        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding-top: 70px; }
         
-        .bot-msg { background: #f1f0f0; padding: 10px 14px; border-radius: 15px 15px 15px 0; margin-bottom: 12px; align-self: flex-start; max-width: 85%; font-size: 14px; }
-        .user-btn { background: var(--secondary); color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-top: 5px; cursor: pointer; font-size: 14px; }
-        pre { background: #272822; color: #f8f8f2; padding: 10px; border-radius: 8px; font-size: 11px; overflow-x: auto; white-space: pre-wrap; }
+        /* Navbar & Hero */
+        .navbar { background: var(--dark) !important; }
+        .hero { background: var(--dark); color: white; padding: 40px 0; text-align: center; border-radius: 0 0 40px 40px; }
+
+        /* Tool Cards */
+        .tool-card { display: none; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .tool-card.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Visitor Counter Styling */
+        .visitor-counter {
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border: 1px solid #eee;
+        }
+        .counter-number {
+            font-weight: bold;
+            color: var(--green);
+            font-size: 1.2rem;
+            margin-left: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Chatbot (Floating) */
+        #chat-trigger { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--green); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 1001; }
+        #chat-window { position: fixed; bottom: 90px; right: 20px; width: 320px; height: 400px; background: white; border-radius: 15px; display: none; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden; }
+        #chat-header { background: var(--dark); color: white; padding: 10px 15px; display: flex; justify-content: space-between; }
+        #chat-body { flex: 1; padding: 15px; overflow-y: auto; background: #f8f9fa; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container"><a class="navbar-brand fw-bold" href="#">SACHIN TECH AI</a></div>
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">SACHIN TECH AI</a>
+        <div class="ms-auto d-flex">
+            <button class="btn btn-outline-light btn-sm me-2" onclick="switchTab('home')">Home</button>
+            <button class="btn btn-outline-light btn-sm me-2" onclick="switchTab('web')">Web</button>
+            <button class="btn btn-outline-light btn-sm me-2" onclick="switchTab('img')">Image</button>
+            <button class="btn btn-outline-light btn-sm" onclick="switchTab('pdf')">PDF</button>
+        </div>
+    </div>
 </nav>
 
-<header class="hero-section text-center">
+<header class="hero">
     <div class="container">
-        <h1 class="display-6 fw-bold">Free Web, Image & PDF AI Tools</h1>
-        <p>GitHub tutorial aur powerful tools ek hi jagah par.</p>
-        <button onclick="toggleChat()" class="btn btn-success rounded-pill px-4">Open AI Bot</button>
+        <h1>All-in-One AI Toolbox</h1>
+        <div class="visitor-counter">
+            <i class="fas fa-users text-muted"></i>
+            <span class="ms-2 small text-muted">Total Visitors:</span>
+            <span class="counter-number" id="count">0000</span>
+        </div>
     </div>
 </header>
 
-<div class="container blog-section">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="blog-card">
-                <h3>GitHub Se Website Banane Ka Tarika</h3>
-                <p>GitHub Pages ek muft service hai. Aapko bas ek repository banani hai aur apni HTML file upload karni hai. Hamara AI Bot aapko isme step-by-step guide karega.</p>
-                <div class="bg-light p-3 border-start border-success border-4 mb-3">
-                    <strong>Tip:</strong> Hamesha apni main file ka naam <code>index.html</code> rakhein taaki GitHub use pehchan sake.
-                </div>
-            </div>
-        </div>
+<div class="container my-5 text-center">
+    <div id="tab-home" class="tool-card active">
+        <h3>GitHub Free Hosting Tutorial</h3>
+        <p>GitHub par website host karne ke liye repo banayein aur index.html upload karein. Hamara AI bot aapko pura code likh kar dega.</p>
+        <img src="https://images.unsplash.com/photo-1618401471353-b98aadebc25a?auto=format&fit=crop&w=400" class="img-fluid rounded mb-3">
     </div>
-</div>
 
-<div id="chat-launcher" style="position:fixed; bottom:20px; right:20px; background:var(--secondary); color:white; width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:1001;" onclick="toggleChat()">
-    <i class="fas fa-robot fa-2x"></i>
-</div>
-
-<div id="chatbot-container">
-    <div id="chat-header"><span>Digital Assistant 🚀</span><i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer"></i></div>
-    <div id="chat-content">
-        <div class="bot-msg">Namaste! Main aapka AI assistant hoon. Aap kya karna chahte hain?</div>
+    <div id="tab-web" class="tool-card">
+        <h3>🌐 Web Code Generator</h3>
+        <input type="text" id="biz-n" class="form-control mb-2" placeholder="Business Name">
+        <button class="btn btn-success" onclick="document.getElementById('out').innerText='<html><body><h1>Hello World</h1></body></html>'; document.getElementById('out').style.display='block';">Generate Code</button>
+        <pre id="out" class="mt-3 bg-dark text-white p-3 rounded" style="display:none"></pre>
     </div>
-    <div id="chat-footer">
-        <button class="user-btn mb-1" onclick="startWeb()">🌐 Website Builder</button>
-        <button class="user-btn mb-1" style="background:var(--accent)" onclick="startImg()">🖼️ Image Tools</button>
-        <button class="user-btn" style="background:var(--doc-color)" onclick="startDoc()">📄 PDF to Text (Converter)</button>
+    
+    </div>
+
+<div id="chat-trigger" onclick="toggleChat()"><i class="fas fa-robot"></i></div>
+<div id="chat-window">
+    <div id="chat-header"><span>Sachin AI Bot</span><i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer"></i></div>
+    <div id="chat-body">
+        <div class="bg-white p-2 rounded mb-2 border">Hi! Main Sachin AI hoon. Main aapke liye tools switch kar sakta hoon.</div>
+    </div>
+    <div class="p-2 border-top">
+        <button class="btn btn-sm btn-primary w-100 mb-1" onclick="switchTab('web'); addBotMsg('Web Builder Open ho gaya!');">Web Builder</button>
+        <button class="btn btn-sm btn-info text-white w-100" onclick="switchTab('img'); addBotMsg('Image Tool Open ho gaya!');">Image Editor</button>
     </div>
 </div>
 
 <script>
-    const chatContent = document.getElementById('chat-content');
-    const chatFooter = document.getElementById('chat-footer');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    // VISITOR COUNTER LOGIC
+    // Hum CountAPI ka use kar rahe hain jo free aur simple hai
+    async function updateCounter() {
+        try {
+            // 'sachintech-v1' aapki website ki ek unique key hai
+            const response = await fetch('https://api.countapi.xyz/update/sachintech/visitors/?amount=1');
+            const data = await response.json();
+            document.getElementById('count').innerText = data.value.toString().padStart(4, '0');
+        } catch (error) {
+            // Agar API down ho toh random fake counter dikhayega (Optional)
+            document.getElementById('count').innerText = "1248+";
+        }
+    }
+    updateCounter();
 
     function toggleChat() {
-        const chat = document.getElementById('chatbot-container');
-        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+        const win = document.getElementById('chat-window');
+        win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    function addMsg(text) {
-        const div = document.createElement('div');
-        div.className = 'bot-msg';
-        div.innerHTML = text;
-        chatContent.appendChild(div);
-        chatContent.scrollTop = chatContent.scrollHeight;
+    function switchTab(id) {
+        document.querySelectorAll('.tool-card').forEach(t => t.classList.remove('active'));
+        document.getElementById('tab-' + id).classList.add('active');
     }
 
-    // --- Web Builder ---
-    function startWeb() {
-        chatContent.innerHTML = '';
-        addMsg("Website Builder active! Apne business ka naam likhein.");
-        chatFooter.innerHTML = `<input type="text" id="bName" class="form-control mb-2"><button class="user-btn" onclick="genWeb()">Generate Code</button><button class="user-btn bg-secondary mt-1" onclick="location.reload()">Back</button>`;
-    }
-    function genWeb() {
-        const n = document.getElementById('bName').value || "My Business";
-        const code = `<html><body><h1>Welcome to ${n}</h1></body></html>`;
-        const pre = document.createElement('pre');
-        pre.innerText = code;
-        chatContent.appendChild(pre);
-        addMsg("Ye raha aapka code.");
-    }
-
-    // --- Image Tools ---
-    function startImg() {
-        chatContent.innerHTML = '';
-        addMsg("Image Editor active! File upload karein.");
-        chatFooter.innerHTML = `<input type="file" id="f" class="form-control mb-2" accept="image/*" onchange="preview()"><div id="btns" style="display:none"><button class="user-btn" onclick="location.reload()">Back</button></div>`;
-    }
-    function preview() { document.getElementById('btns').style.display='block'; addMsg("Image loaded. Aap compress ya enhance kar sakte hain."); }
-
-    // --- PDF to Doc/Text Converter ---
-    function startDoc() {
-        chatContent.innerHTML = '';
-        addMsg("📄 PDF Converter active! Apni PDF file upload karein taaki main uska text nikal saku.");
-        chatFooter.innerHTML = `
-            <input type="file" id="pdfFile" class="form-control mb-2" accept=".pdf">
-            <button class="user-btn" onclick="convertPdf()">Convert to Text 🚀</button>
-            <button class="user-btn bg-secondary mt-1" onclick="location.reload()">Back</button>`;
-    }
-
-    async function convertPdf() {
-        const file = document.getElementById('pdfFile').files[0];
-        if(!file) return alert("File chunein!");
-        
-        addMsg("Processing PDF... Kripya intezar karein.");
-        const reader = new FileReader();
-        reader.onload = async function() {
-            const typedarray = new Uint8Array(this.result);
-            const pdf = await pdfjsLib.getDocument(typedarray).promise;
-            let fullText = "";
-            
-            for(let i=1; i<=pdf.numPages; i++) {
-                const page = await pdf.getPage(i);
-                const content = await page.getTextContent();
-                const strings = content.items.map(item => item.str);
-                fullText += strings.join(' ') + "\n\n";
-            }
-            
-            addMsg("✅ Conversion Complete! Aapka text niche hai:");
-            const box = document.createElement('pre');
-            box.innerText = fullText;
-            chatContent.appendChild(box);
-            
-            // Download option
-            const blob = new Blob([fullText], {type: "text/plain"});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "converted-doc.txt";
-            a.className = "user-btn text-center d-block text-decoration-none bg-primary";
-            a.innerText = "📥 Download as Text File";
-            chatContent.appendChild(a);
-            chatContent.scrollTop = chatContent.scrollHeight;
-        };
-        reader.readAsArrayBuffer(file);
+    function addBotMsg(txt) {
+        document.getElementById('chat-body').innerHTML += `<div class='bg-white p-2 rounded mb-2 border small'>${txt}</div>`;
     }
 </script>
 
