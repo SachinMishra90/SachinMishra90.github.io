@@ -1,115 +1,64 @@
 /**
- * SACHIN TECH - AI VIRTUAL MANAGER (v2.0)
- * Updated for: Image Processing, Web Builder, and Advanced Synergy Propagation.
+ * SACHIN TECH - AI DEV CHATBOT (v2.5)
+ * Feature: Line-by-Line HTML/CSS Code Generation
  */
 
-const AIManager = {
-    config: {
-        version: "2.0.1",
-        nodePrefix: "ST-NODE-",
-        adEfficiency: 0.92 // Increased for better Adsense potential
+const AIChatbot = {
+    // Basic Knowledge Base (Isse aap baad mein expand kar sakte hain)
+    responses: {
+        "login": '<div class="login-box">\n  <input type="text" placeholder="Username">\n  <input type="password" placeholder="Password">\n  <button>Login</button>\n</div>',
+        "button": '<button style="padding: 10px 20px; background: #00f2fe; border: none; border-radius: 5px;">Click Me</button>',
+        "navbar": '<nav style="display: flex; justify-content: space-between; padding: 20px; background: #333; color: white;">\n  <div>Logo</div>\n  <div>Home | Services | Contact</div>\n</nav>',
+        "card": '<div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; max-width: 300px;">\n  <h3>Card Title</h3>\n  <p>This is a sample description.</p>\n</div>',
+        "table": '<table border="1">\n  <tr><th>Name</th><th>Role</th></tr>\n  <tr><td>Sachin</td><td>Engineer</td></tr>\n</table>'
     },
 
-    init() {
-        console.log("AI Virtual Manager v2.0 Online...");
-        this.monitorEarningPotential();
-    },
-
-    // 1. IMAGE BEAUTY LAB LOGIC (Ang: Image Editor)
-    previewImage(event) {
-        const reader = new FileReader();
-        const display = document.getElementById('img-display');
+    askAI() {
+        const input = document.getElementById('chat-input').value.toLowerCase();
+        const output = document.getElementById('chat-output');
         
-        reader.onload = () => {
-            if(display) {
-                display.src = reader.result;
-                display.style.display = "block";
-                this.logStatus("Image Loaded: Ready for AI Enhancement.");
-            }
-        };
-        if(event.target.files[0]) {
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    },
+        if (!input) return;
 
-    applyMagic(filterType) {
-        const img = document.getElementById('img-display');
-        if (!img || !img.src) return alert("Please upload an image first.");
+        output.innerHTML = "<code>AI is thinking...</code>";
 
-        // AI Filter Logic
-        if (filterType === 'glow') {
-            img.style.filter = "brightness(1.2) contrast(1.1) saturate(1.2)";
-            this.logStatus("AI Filter: Luminous Glow Applied.");
-        } else if (filterType === 'smooth') {
-            img.style.filter = "blur(0.4px) contrast(1.05) saturate(1.1)";
-            this.logStatus("AI Filter: Skin Retouch Applied.");
-        }
-    },
-
-    downloadResult() {
-        const img = document.getElementById('img-display');
-        if (!img || !img.src) return;
-        
-        const link = document.createElement('a');
-        link.download = 'SachinTech_AI_Edit.png';
-        link.href = img.src;
-        link.click();
-        this.logStatus("Export HQ: Success.");
-    },
-
-    // 2. WEB BUILDER LOGIC (Ang: Code Generator)
-    buildWeb() {
-        const title = document.getElementById('site-name').value || "My Project";
-        const output = document.getElementById('web-output');
-        
-        if(output) {
-            output.classList.remove('d-none');
-            output.innerHTML = `<i class="fas fa-check-circle"></i> Engineering System: Core files for <b>${title}</b> generated successfully.`;
-        }
-    },
-
-    // 3. SYNERGY PROTOCOL (Old Viral Logic Optimized)
-    handlePropagation(platform) {
-        // Unique Node Generation
-        const nodeID = this.config.nodePrefix + Math.random().toString(36).substring(7).toUpperCase();
-        const viralLink = `${window.location.origin}${window.location.pathname}?node=${nodeID}`;
-        
-        this.logStatus("AI is optimizing your reach link...");
-        
-        navigator.clipboard.writeText(viralLink);
-        
         setTimeout(() => {
-            alert("AI Synergy: Unique Node Optimized & Copied to Clipboard!");
-            // Messenger ya Facebook par redirect
-            const shareUrl = platform === 'messenger' 
-                ? `fb-messenger://share/?link=${encodeURIComponent(viralLink)}`
-                : `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(viralLink)}`;
-            window.open(shareUrl, '_blank');
-        }, 500);
+            let found = false;
+            let result = "";
+
+            // User ki demand check karna (Keyword based search)
+            for (let key in this.responses) {
+                if (input.includes(key)) {
+                    result = this.responses[key];
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                output.innerHTML = `<strong>Manager:</strong> Here is your code for "${input}":<br><pre><code>${this.escapeHTML(result)}</code></pre>`;
+            } else {
+                output.innerHTML = "<strong>Manager:</strong> Sorry, I can only generate basic components like 'Login', 'Button', 'Navbar', 'Card', or 'Table' right now. I am learning more!";
+            }
+            
+            document.getElementById('chat-input').value = ""; // Clear input
+        }, 800);
     },
 
-    // 4. UTILITIES
-    logStatus(msg) {
-        const statusBox = document.getElementById('ai-status');
-        if(statusBox) statusBox.innerText = `Manager: ${msg}`;
-        console.log(`[AI LOG]: ${msg}`);
-    },
-
-    monitorEarningPotential() {
-        console.log("AdSense Potential Analysis: Optimal for Web Tools.");
+    // HTML ko text form mein dikhane ke liye helper
+    escapeHTML(str) {
+        return str.replace(/[&<>"']/g, function(m) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[m];
+        });
     }
 };
 
-// Global Helper Functions (Index.html ke buttons ke liye)
-function previewImg(e) { AIManager.previewImage(e); }
-function applyMagic(f) { AIManager.applyMagic(f); }
-function downloadResult() { AIManager.downloadResult(); }
-function buildWeb() { AIManager.buildWeb(); }
-function mutateAndShare(p) { AIManager.handlePropagation(p); }
-
-// Start
-window.onload = () => {
-    AIManager.init();
-    // Agar visitor details collector run ho raha hai, toh use distrub na karein
-    if(typeof VisitorEngine !== 'undefined') VisitorEngine.init();
-};
+// Global function linking for HTML button
+function askAI() {
+    AIChatbot.askAI();
+}
