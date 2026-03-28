@@ -3,139 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachin Tech | Engineering Solutions & AI Lab</title>
+    <title>Sachin Tech | Engineering Solutions</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { --accent: #00f2fe; --bg: #0a0a0a; --glass: rgba(255, 255, 255, 0.05); }
-        body { background-color: var(--bg); color: #f0f0f0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        
-        /* Navbar */
-        .navbar { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        
-        /* Professional Sections */
-        section { padding: 80px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .glass-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; }
-        
-        .hero-gradient { background: radial-gradient(circle at top right, rgba(0, 242, 254, 0.1), transparent); }
-        .btn-engineer { background: var(--accent); color: #000; font-weight: 600; border-radius: 8px; border: none; padding: 12px 25px; transition: 0.3s; }
-        .btn-engineer:hover { box-shadow: 0 0 20px rgba(0, 242, 254, 0.5); transform: translateY(-2px); }
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
-        /* Hidden initially for SPA feel */
-        .content-section { display: none; }
-        .content-section.active { display: block; animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    <style>
+        :root { --accent: #00f2fe; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
+        body { background-color: var(--bg); color: #e0e0e0; font-family: 'Space Grotesk', sans-serif; padding-top: 80px; }
+        
+        .navbar { background: rgba(5, 5, 5, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        .glass-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 30px; margin-bottom: 20px; }
+        
+        .btn-premium { background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); color: #000; font-weight: 600; border: none; border-radius: 12px; padding: 10px 25px; }
+        
+        .panel { display: none; } 
+        .panel.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Public Visitor Badge */
+        #public-visitor-count { font-weight: 500; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#" onclick="showPage('home')">SACHIN<span style="color:var(--accent)">TECH</span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto gap-3">
-                <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home')">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('services')">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('lab')">AI Lab</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('about')">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('contact')">Contact</a></li>
-            </ul>
+        <a class="navbar-brand fw-bold" href="#" onclick="showTab('home')">SACHIN<span style="color:var(--accent)">TECH</span></a>
+        <div class="d-flex gap-2">
+            <button class="btn btn-sm text-white-50" onclick="showTab('home')">Home</button>
+            <button class="btn btn-sm text-white-50" onclick="showTab('lab')">AI Lab</button>
+            <button class="btn btn-premium" onclick="showTab('web')">Web Tools</button>
         </div>
     </div>
 </nav>
 
-<div id="page-home" class="content-section active hero-gradient">
-    <div class="container text-center" style="margin-top: 100px;">
-        <h1 class="display-3 fw-bold">Next-Gen <span style="color:var(--accent)">Engineering</span> Utilities</h1>
-        <p class="lead text-white-50">Automating digital workflows with AI-driven micro-tools.</p>
-        <button class="btn btn-engineer mt-4" onclick="showPage('lab')">Explore AI Lab</button>
-        
-        <div class="mt-5 ad-slot" style="height:90px; border: 1px dashed #333; line-height:90px; color:#555;">AdSense Optimized Space</div>
-    </div>
-</div>
+<div class="container">
 
-<div id="page-services" class="content-section">
-    <div class="container">
-        <h2 class="text-center mb-5 fw-bold">Our Services</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="glass-card text-center">
-                    <i class="fas fa-magic fa-2x mb-3 text-info"></i>
-                    <h4>AI Image Processing</h4>
-                    <p class="text-white-50">Smart enhancement and automated editing for professional results.</p>
-                </div>
+    <div id="p-home" class="panel active">
+        <div class="glass-card text-center">
+            <h1 class="display-5 fw-bold">Engineering <span style="color:var(--accent)">Synergy</span></h1>
+            <p class="text-white-50">Automated digital workflows & secure network propagation.</p>
+            
+            <div class="my-4">
+                <span id="public-visitor-count" class="badge rounded-pill bg-dark border border-info p-2 px-3 text-info">
+                    Scanning Network...
+                </span>
             </div>
-            <div class="col-md-4">
-                <div class="glass-card text-center">
-                    <i class="fas fa-code fa-2x mb-3 text-info"></i>
-                    <h4>Web Automation</h4>
-                    <p class="text-white-50">Micro-utility tools designed to speed up developer workflows.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="glass-card text-center">
-                    <i class="fas fa-chart-line fa-2x mb-3 text-info"></i>
-                    <h4>Data Synergy</h4>
-                    <p class="text-white-50">Advanced link-sharing protocols for secure digital reach.</p>
+
+            <div class="row g-3 justify-content-center">
+                <div class="col-md-6">
+                    <button class="btn btn-outline-info w-100 py-3" onclick="mutateAndShare('messenger')">
+                        <i class="fab fa-facebook-messenger me-2"></i> Propagate Node
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="page-lab" class="content-section">
-    <div class="container">
+    <div id="p-lab" class="panel">
         <div class="glass-card">
-            <h3>AI Beauty & Editing Lab</h3>
-            <input type="file" id="img-input" class="form-control bg-dark text-white border-secondary mb-3" onchange="AIManager.previewImage(event)">
+            <h3>AI Beauty Lab</h3>
+            <input type="file" id="img-input" class="form-control bg-dark text-white border-secondary mb-3" onchange="previewImg(event)">
             <div class="row g-4">
-                <div class="col-lg-8"><div id="canvas-container" class="text-center bg-black rounded-3 p-2"><img id="main-display" style="max-width:100%; border-radius:10px;"></div></div>
+                <div class="col-lg-8 text-center bg-black rounded-3 p-2" style="min-height:300px;">
+                    <img id="img-display" style="max-width:100%; border-radius:15px;">
+                </div>
                 <div class="col-lg-4 d-grid gap-2">
-                    <button class="btn btn-outline-info" onclick="AIManager.editImage('grayscale')">B&W Filter</button>
-                    <button class="btn btn-outline-info" onclick="AIManager.editImage('bright')">Auto Brighten</button>
-                    <button class="btn btn-engineer mt-3" onclick="AIManager.download()">Export Final HQ</button>
+                    <button class="btn btn-outline-light" onclick="applyMagic('smooth')">✨ Skin Retouch</button>
+                    <button class="btn btn-outline-light" onclick="applyMagic('glow')">💡 Luminous Glow</button>
+                    <button class="btn btn-premium mt-3" onclick="downloadResult()">Export HQ</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="page-about" class="content-section">
-    <div class="container text-center">
-        <div class="glass-card mx-auto" style="max-width:800px;">
-            <h2>About Sachin Tech</h2>
-            <p class="mt-4">Developed by a professional Engineer, Sachin Tech is a hub for high-performance web utilities. We specialize in creating productive, AI-powered tools that solve real-world digital problems efficiently.</p>
+    <div id="p-web" class="panel">
+        <div class="glass-card">
+            <h3>Web Codebase Generator</h3>
+            <div class="mb-3">
+                <input type="text" id="site-name" class="form-control bg-dark text-white" placeholder="Project Title">
+            </div>
+            <button class="btn btn-premium" onclick="buildWeb()">Generate Core Files</button>
+            <div id="web-output" class="mt-4 p-3 bg-black rounded border border-success text-success d-none">
+                System: Code Generated Successfully.
+            </div>
         </div>
     </div>
-</div>
 
-<div id="page-contact" class="content-section">
-    <div class="container text-center">
-        <div class="glass-card mx-auto" style="max-width:600px;">
-            <h2>Contact Us</h2>
-            <form id="contactForm" class="mt-4 text-start">
-                <input type="text" class="form-control bg-dark text-white mb-3" placeholder="Your Name">
-                <input type="email" class="form-control bg-dark text-white mb-3" placeholder="Your Email">
-                <textarea class="form-control bg-dark text-white mb-3" rows="4" placeholder="Your Message"></textarea>
-                <button type="button" class="btn btn-engineer w-100">Send Message</button>
-            </form>
+    <div id="admin-root" style="display:none;" class="my-5">
         </div>
-    </div>
+
 </div>
 
-<script src="ai-manager.js"></script>
 <script>
-    function showPage(id) {
-        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        document.getElementById('page-' + id).classList.add('active');
-        window.scrollTo(0,0);
+    // Tab Switching Logic
+    function showTab(id) {
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('p-' + id).classList.add('active');
     }
 </script>
+
+<script src="visitor-details.js"></script> 
+
+<script src="ai-manager.js"></script>
+
+<script src="admin-control.js"></script>
+
 </body>
 </html>
