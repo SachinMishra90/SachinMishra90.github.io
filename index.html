@@ -2,106 +2,126 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachin Tech | Engineering & Development Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sachin Tech | Pro Video Lab</title>
+
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319" crossorigin="anonymous"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        :root { --accent: #00f2fe; --bg: #0a0a0a; }
-        body { background-color: var(--bg); color: #f0f0f0; font-family: sans-serif; padding-top: 70px; }
-        .glass-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; margin-bottom: 20px; }
-        .nav-link { color: #ccc !important; cursor: pointer; }
-        .nav-link:hover { color: var(--accent) !important; }
-        .section-panel { display: none; }
-        .section-panel.active { display: block; }
-        .btn-main { background: var(--accent); color: #000; font-weight: bold; border: none; padding: 10px 20px; border-radius: 8px; }
+        :root { --accent: #00f2fe; --filmora-bg: #1a1a1a; --timeline-bg: #0f0f0f; }
+        body { background-color: #0a0a0a; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        
+        /* App Interface Layout */
+        .app-container { display: flex; flex-direction: column; height: 100vh; }
+        .header-nav { height: 50px; background: #222; border-bottom: 1px solid #333; display: flex; align-items: center; padding: 0 20px; }
+        
+        .editor-grid { display: grid; grid-template-columns: 300px 1fr 350px; flex-grow: 1; background: var(--filmora-bg); }
+        
+        /* Filmora Sections */
+        .asset-panel { border-right: 1px solid #333; padding: 15px; overflow-y: auto; }
+        .preview-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; position: relative; }
+        .control-panel { border-left: 1px solid #333; padding: 15px; }
+        
+        .timeline-area { height: 250px; background: var(--timeline-bg); border-top: 2px solid #333; padding: 10px; position: relative; }
+        
+        /* UI Elements */
+        .track { height: 45px; background: #252525; border: 1px solid #333; margin-bottom: 5px; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; }
+        .preview-box { width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #111; border: 2px solid #444; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        
+        .btn-action { background: #333; color: white; border: 1px solid #444; padding: 5px 15px; border-radius: 4px; font-size: 13px; }
+        .btn-action:hover { background: var(--accent); color: #000; }
+        
+        .active-tab { border-bottom: 2px solid var(--accent); color: var(--accent) !important; }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark border-bottom border-secondary">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#">SACHIN<span style="color:var(--accent)">TECH</span></a>
+<div class="app-container">
+    <div class="header-nav justify-content-between">
+        <div class="fw-bold text-info">SachinTech <span class="text-white">Video Studio</span></div>
         <div class="d-flex gap-3">
-            <span class="nav-link" onclick="showTab('home')">Home</span>
-            <span class="nav-link" onclick="showTab('dev')">Dev Tools</span>
-            <span class="nav-link" onclick="showTab('about')">About</span>
-            <span class="nav-link" onclick="showTab('contact')">Contact</span>
-        </div>
-    </div>
-</nav>
-
-<div class="container mt-4">
-
-    <div id="tab-home" class="section-panel active">
-        <div class="glass-card text-center">
-            <h2>Real-Time Traffic Monitor</h2>
-            <h1 id="public-visitor-count" class="display-4 text-info fw-bold">0</h1>
-            <p class="text-white-50">Total Real Users Served</p>
-            <button class="btn btn-outline-info" onclick="mutateAndShare('messenger')">Propagate Reach Node</button>
+            <button class="btn btn-sm btn-outline-light" onclick="exportVideo()">Export</button>
+            <i class="fas fa-cog mt-1"></i>
         </div>
     </div>
 
-    <div id="tab-dev" class="section-panel">
-        <div class="glass-card">
-            <h3><i class="fas fa-code"></i> Web Development Tools</h3>
-            <p class="text-white-50">Choose a service to begin development.</p>
-            <div class="row g-3">
-                <div class="col-md-6"><button class="btn btn-dark w-100 border-secondary">Website Development</button></div>
-                <div class="col-md-6"><button class="btn btn-dark w-100 border-secondary">App Development</button></div>
+    <div class="editor-grid">
+        <div class="asset-panel">
+            <h6><i class="fas fa-folder-open me-2"></i> Media</h6>
+            <div class="mt-3 p-4 border border-dashed text-center rounded border-secondary" style="border-style: dashed !important;">
+                <input type="file" id="upload" hidden multiple>
+                <label for="upload" style="cursor: pointer;">
+                    <i class="fas fa-cloud-upload-alt fa-2x text-white-50"></i>
+                    <p class="small mt-2">Import Reels / Images</p>
+                </label>
             </div>
-
-            <div class="mt-5 p-3 bg-black rounded border border-info">
-                <h5><i class="fas fa-robot"></i> Coding AI Chatbot</h5>
-                <div id="chat-output" class="p-2 mb-3 small text-success" style="min-height: 100px; background: #000;">Main AI: Hello Sachin, what code do you need today?</div>
-                <div class="input-group">
-                    <input type="text" id="chat-input" class="form-control bg-dark text-white border-secondary" placeholder="Write 'create a login button'...">
-                    <button class="btn btn-info" onclick="askAI()">Ask AI</button>
+            <div class="mt-4">
+                <p class="small text-white-50">Effects Library</p>
+                <div class="d-grid gap-2">
+                    <button class="btn-action">Transitions</button>
+                    <button class="btn-action">Filters</button>
+                    <button class="btn-action">Music Loop</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="tab-about" class="section-panel">
-        <div class="glass-card">
-            <h2>About Sachin Tech</h2>
-            <p>Developed by a professional Engineer, Sachin Tech is a hub for high-performance web utilities. Based in Barabanki, we focus on productive engineering work and passive income strategies.</p>
+        <div class="preview-panel">
+            <div class="preview-box">
+                <div class="text-center">
+                    <i class="fas fa-play fa-3x text-white-50"></i>
+                    <p class="mt-3 small">No Media Selected</p>
+                </div>
+            </div>
+            <div class="mt-3 d-flex gap-4">
+                <i class="fas fa-step-backward"></i>
+                <i class="fas fa-play text-info"></i>
+                <i class="fas fa-step-forward"></i>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <h6>Properties</h6>
+            <hr class="bg-secondary">
+            <label class="small text-white-50">Scale</label>
+            <input type="range" class="form-range" min="0" max="200">
+            
+            <label class="small text-white-50 mt-3">Opacity</label>
+            <input type="range" class="form-range" min="0" max="100">
+            
+            <div class="mt-4">
+                <h6>AI Tools</h6>
+                <button class="btn btn-sm btn-info w-100 mb-2">Auto Captions</button>
+                <button class="btn btn-sm btn-outline-info w-100">Remove BG</button>
+            </div>
         </div>
     </div>
 
-    <div id="tab-contact" class="section-panel">
-        <div class="glass-card">
-            <h2>Contact Us</h2>
-            <form class="mt-3">
-                <input type="text" class="form-control bg-dark text-white mb-2" placeholder="Your Name">
-                <textarea class="form-control bg-dark text-white mb-2" rows="3" placeholder="How can I help you?"></textarea>
-                <button type="button" class="btn btn-main w-100">Submit Message</button>
-            </form>
+    <div class="timeline-area">
+        <div class="d-flex justify-content-between mb-2">
+            <div class="small text-info"><i class="fas fa-cut"></i> Timeline 00:00:00</div>
+            <div>
+                <i class="fas fa-search-minus mx-2"></i>
+                <i class="fas fa-search-plus"></i>
+            </div>
         </div>
+        <div class="track"><i class="fas fa-video me-2 text-info"></i> Video Track 1</div>
+        <div class="track"><i class="fas fa-font me-2 text-warning"></i> Subtitles / Text</div>
+        <div class="track"><i class="fas fa-music me-2 text-primary"></i> Audio Track 1</div>
     </div>
-
-    <div id="admin-root" style="display:none;"></div>
-
 </div>
 
 <script>
-    function showTab(id) {
-        document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById('tab-' + id).classList.add('active');
-    }
-
-    function askAI() {
-        let input = document.getElementById('chat-input').value;
-        let output = document.getElementById('chat-output');
-        output.innerHTML = "Generating Code for: " + input + "<br><br><code>// Your Code will appear here...</code>";
-        // Yahan aap apna logic ya API connect kar sakte hain
+    function exportVideo() {
+        alert("Preparing Export in 4K for Instagram Reels...");
     }
 </script>
-
-<script src="visitor-details.js"></script>
-<script src="ai-manager.js"></script>
-<script src="admin-control.js"></script>
 
 </body>
 </html>
