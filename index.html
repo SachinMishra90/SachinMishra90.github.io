@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sachin Tech - AI Video Editor</title>
+    <title>Sachin Tech - Pro AI Editor</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,110 +20,116 @@
         .screen.active { display: block; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
+        .meta-list { background: #1c1c1e; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+        .meta-item { display: flex; align-items: center; padding: 18px 15px; border-bottom: 1px solid #2c2c2e; cursor: pointer; transition: 0.2s; }
+        .meta-item:active { background: #2c2c2e; }
+        .meta-icon { width: 40px; height: 40px; border-radius: 10px; background: #2c2c2e; margin-right: 15px; display: flex; align-items: center; justify-content: center; color: var(--accent); }
+
         .preview-window { width: 100%; max-width: 280px; aspect-ratio: 9/16; background: #000; border: 2px solid #333; border-radius: 12px; margin: 0 auto 20px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        #output-canvas { width: 100%; height: 100%; object-fit: contain; }
-        .ai-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #252525; }
-        .btn-ai-glow { background: linear-gradient(45deg, #00f2fe, #0072ff); border: none; color: #000; font-weight: 700; width: 100%; padding: 12px; border-radius: 10px; margin-top: 10px; }
+        #output-canvas { width: 100%; height: 100%; object-fit: contain; display: none; }
         
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000; }
+        .loader-overlay { position: absolute; background: rgba(0,0,0,0.8); width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #333; z-index: 1000; }
         .nav-link { color: #666; text-align: center; font-size: 11px; text-decoration: none !important; }
         .nav-link.active { color: var(--accent); }
-
-        .loader-overlay { position: absolute; background: rgba(0,0,0,0.8); width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+        .nav-link i { font-size: 20px; display: block; }
     </style>
 </head>
 <body>
 
     <header class="app-header">
         <div class="logo">SACHIN<span class="text-white">TECH</span> <small style="font-size: 10px; color: #555;">FILMORA AI</small></div>
-        <button class="btn btn-sm btn-info fw-bold" onclick="exportVideo()">EXPORT</button>
+        <button class="btn btn-sm btn-info fw-bold" onclick="location.reload()">REFRESH</button>
     </header>
 
     <div class="app-content">
-        <div id="editor" class="screen active">
+        <div id="home-screen" class="screen active">
+            <div class="meta-list">
+                <div class="meta-item" onclick="openAIEditor()">
+                    <div class="meta-icon"><i class="fas fa-video"></i></div>
+                    <div class="meta-text">Create a video from my photo</div>
+                </div>
+                <div class="meta-item" onclick="openAIEditor()">
+                    <div class="meta-icon"><i class="fas fa-magic"></i></div>
+                    <div class="meta-text">Restyle my photo with AI Face Fix</div>
+                </div>
+            </div>
+            <p class="text-center small text-white-50">AI Lab: Prayagraj, UP</p>
+        </div>
+
+        <div id="editor-screen" class="screen">
             <div class="preview-window">
                 <div class="loader-overlay" id="ai-loader">
                     <div class="spinner-border text-info mb-2"></div>
                     <span class="small">AI Processing...</span>
                 </div>
-                <img id="output-canvas" src="" style="display:none;">
+                <img id="output-canvas" src="">
                 <div id="placeholder" class="text-center">
-                    <i class="fas fa-video fa-3x text-white-50"></i>
+                    <i class="fas fa-play-circle fa-3x text-white-50"></i>
                     <p class="small text-white-50 mt-2">Filmora Style Preview</p>
                 </div>
             </div>
 
-            <div class="ai-card">
-                <h6 class="small fw-bold text-info"><i class="fas fa-user-circle me-2"></i>FACE HUGGING AI</h6>
-                <label class="small text-white-50">Upload Face Image:</label>
-                <input type="file" id="face-input" class="form-control bg-dark text-white border-secondary mb-2" accept="image/*">
-                <button class="btn-ai-glow" onclick="processFace()">Apply Face Effect</button>
-            </div>
-        </div>
-
-        <div id="about" class="screen">
-            <div class="ai-card text-center">
-                <h5>Professional Engineer</h5>
-                <p class="small text-white-50">Location: **Prayagraj, UP**</p>
-                <p class="small">Status: **AdSense Enabled**</p>
+            <div class="p-2">
+                <input type="file" id="face-input" class="form-control bg-dark text-white border-secondary mb-3" accept="image/*" onchange="processFaceAI()">
+                <button class="btn btn-info w-100 fw-bold py-3" style="border-radius:12px;" onclick="document.getElementById('face-input').click()">CHOOSE PHOTO</button>
+                <button class="btn btn-outline-secondary w-100 mt-3" onclick="goHome()">BACK TO MENU</button>
             </div>
         </div>
     </div>
 
     <nav class="bottom-nav">
-        <a href="#" class="nav-link active" onclick="navTo('editor', this)"><i class="fas fa-edit"></i><br>Editor</a>
-        <a href="#" class="nav-link" onclick="navTo('about', this)"><i class="fas fa-user"></i><br>Profile</a>
+        <a href="#" class="nav-link active" onclick="goHome()"><i class="fas fa-home"></i>Home</a>
+        <a href="#" class="nav-link"><i class="fas fa-user"></i>Profile</a>
     </nav>
 
     <script>
-        // Use the token you generated
+        // Token from your screenshot
         const HF_TOKEN = "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"; 
-        const MODEL_URL = "https://api-inference.huggingface.co/models/TencentARC/GFPGAN"; // Face Restoration Model
+        const MODEL_URL = "https://api-inference.huggingface.co/models/TencentARC/GFPGAN";
 
-        async function processFace() {
+        function openAIEditor() {
+            document.getElementById('home-screen').classList.remove('active');
+            document.getElementById('editor-screen').classList.add('active');
+        }
+
+        function goHome() {
+            document.getElementById('editor-screen').classList.remove('active');
+            document.getElementById('home-screen').classList.add('active');
+        }
+
+        async function processFaceAI() {
             const fileInput = document.getElementById('face-input');
             const loader = document.getElementById('ai-loader');
             const output = document.getElementById('output-canvas');
             const placeholder = document.getElementById('placeholder');
 
-            if (!fileInput.files[0]) return alert("Pehle photo select karein!");
+            if (!fileInput.files[0]) return;
 
             loader.style.display = 'flex';
             placeholder.style.display = 'none';
+            output.style.display = 'none';
 
             try {
-                // Actual Hugging Face API Call
                 const response = await fetch(MODEL_URL, {
                     headers: { Authorization: `Bearer ${HF_TOKEN}` },
                     method: "POST",
                     body: fileInput.files[0],
                 });
 
-                if (!response.ok) throw new Error("API Limit or Error");
+                if (!response.ok) throw new Error("Server Busy");
 
                 const blob = await response.blob();
                 output.src = URL.createObjectURL(blob);
                 output.style.display = 'block';
                 loader.style.display = 'none';
-                alert("Success: Face Processed in Prayagraj lab!");
+                alert("Success: AI Processed at Prayagraj Hub!");
             } catch (error) {
-                // Better error handling for token issues
-                console.error(error);
-                alert("Error: Hugging Face connection failed. Token issue ya server busy hai.");
+                alert("AI Server Error. Ek baar Refresh karein.");
                 loader.style.display = 'none';
                 placeholder.style.display = 'block';
             }
-        }
-
-        function navTo(id, el) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function exportVideo() {
-            alert("Rendering... Prayagraj server processing.");
         }
     </script>
 </body>
