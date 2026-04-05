@@ -3,135 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sachin Tech - Filmora AI Pro</title>
+    <title>Sachin Tech Pro AI - Advance Editor</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9508363485592319" crossorigin="anonymous"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        :root { --accent: #00f2fe; --bg: #0a0a0a; --card: #1a1a1a; --timeline: #111; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
+        :root { --accent: #00f2fe; --bg: #0a0a0a; --card: #1a1a1a; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 80px; }
         
-        /* Header */
-        .app-header { background: #111; padding: 12px 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 800; color: var(--accent); font-size: 1.2rem; }
+        .app-header { background: #111; padding: 12px 15px; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; color: var(--accent); letter-spacing: 1px; }
 
-        /* Preview Window (9:16) */
-        .preview-container { background: #000; width: 100%; max-width: 320px; aspect-ratio: 9/16; margin: 15px auto; border: 2px solid #333; border-radius: 12px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        #main-video-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .app-content { padding: 15px; }
+        .screen { display: none; }
+        .screen.active { display: block; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Original 9:16 Preview UI */
+        .preview-window { width: 100%; max-width: 280px; aspect-ratio: 9/16; background: #000; border: 2px solid #333; border-radius: 12px; margin: 0 auto 20px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ai-card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #252525; }
+        .btn-ai-glow { background: linear-gradient(45deg, #00f2fe, #0072ff); border: none; color: #000; font-weight: 700; width: 100%; padding: 12px; border-radius: 10px; margin-top: 10px; }
         
-        /* Tool Cards */
-        .tool-panel { padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .feature-card { background: var(--card); border: 1px solid #252525; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
-        .feature-card:active { transform: scale(0.95); background: #222; }
-        .feature-card i { font-size: 24px; color: var(--accent); margin-bottom: 8px; }
-        .feature-card span { display: block; font-size: 12px; font-weight: 600; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000; }
+        .nav-link { color: #666; text-align: center; font-size: 11px; text-decoration: none !important; }
+        .nav-link.active { color: var(--accent); }
+        .nav-link i { font-size: 22px; display: block; margin-bottom: 3px; }
 
-        /* Advance Timeline */
-        .timeline-area { background: var(--timeline); padding: 15px; border-top: 2px solid #333; position: fixed; bottom: 0; width: 100%; height: 180px; overflow-y: auto; }
-        .track { height: 40px; background: #1a1a1a; margin-bottom: 8px; border-radius: 6px; display: flex; align-items: center; padding: 0 10px; font-size: 10px; border-left: 4px solid var(--accent); position: relative; }
-        .track-label { position: absolute; left: 10px; color: #555; font-weight: bold; }
-        .clip { background: linear-gradient(90deg, #0072ff, #00c6ff); height: 30px; border-radius: 4px; width: 60%; margin-left: 40px; }
-
-        /* Loader */
-        .processing-overlay { position: absolute; background: rgba(0,0,0,0.8); width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 50; }
+        .loader-overlay { position: absolute; background: rgba(0,0,0,0.8); width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
+        #output-image { width: 100%; height: 100%; object-fit: contain; display: none; }
     </style>
 </head>
 <body>
 
     <header class="app-header">
-        <div class="logo">SACHIN<span class="text-white">TECH</span> <span style="font-size: 10px; color: #00f2fe; border: 1px solid; padding: 2px 5px; border-radius: 4px; margin-left: 5px;">PRO AI</span></div>
-        <div>
-            <button class="btn btn-sm btn-outline-light me-1" onclick="location.reload()"><i class="fas fa-redo"></i></button>
-            <button class="btn btn-sm btn-info fw-bold" onclick="exportFinal()">EXPORT</button>
-        </div>
+        <div class="logo">SACHIN<span class="text-white">TECH</span> <small style="font-size: 10px; color: #555;">FILMORA AI</small></div>
+        <button class="btn btn-sm btn-info fw-bold" onclick="exportReel()">EXPORT</button>
     </header>
 
-    <div class="preview-container">
-        <div class="processing-overlay" id="loader">
-            <div class="spinner-border text-info mb-2"></div>
-            <span class="small">AI Rendering...</span>
+    <div class="app-content">
+        <div id="editor" class="screen active">
+            <div class="preview-window">
+                <div class="loader-overlay" id="ai-loader">
+                    <div class="spinner-border text-info mb-2"></div>
+                    <span class="small">AI Processing...</span>
+                </div>
+                <img id="output-image" src="">
+                <div id="placeholder-content" class="text-center">
+                    <i class="fas fa-play-circle fa-3x text-white-50"></i>
+                    <p class="small text-white-50 mt-2">Preview 9:16 HD</p>
+                </div>
+            </div>
+
+            <div class="ai-card">
+                <h6 class="small fw-bold text-info"><i class="fas fa-user-circle me-2"></i>FACE HUGGING AI</h6>
+                <input type="file" id="face-input" class="form-control bg-dark text-white border-secondary mb-2" accept="image/*">
+                <button class="btn-ai-glow" onclick="processFaceAI()">Apply Face Enhance</button>
+            </div>
+
+            <div class="ai-card">
+                <h6 class="small fw-bold text-info"><i class="fas fa-magic me-2"></i>AI TEXT TO VIDEO</h6>
+                <textarea id="text-prompt" class="form-control bg-dark text-white border-secondary mb-2" rows="2" placeholder="Describe scene..."></textarea>
+                <button class="btn btn-sm btn-outline-info w-100 py-2 fw-bold" onclick="generateVideoAI()">Generate Reel</button>
+            </div>
         </div>
-        <video id="main-video-preview" controls></video>
-        <img id="image-result" style="width:100%; display:none;">
-        <div id="empty-msg" class="text-center text-white-50">
-            <i class="fas fa-cloud-upload-alt fa-3x mb-2"></i>
-            <p class="small">Select media to start editing</p>
+
+        <div id="about" class="screen">
+            <div class="ai-card text-center">
+                <h5>Professional Engineer</h5>
+                <p class="small text-white-50">Based in: **Barabanki, UP**</p>
+                <hr class="border-secondary">
+                <p class="small">Site Monetization: **Enabled**</p>
+            </div>
         </div>
     </div>
 
-    <div class="tool-panel">
-        <div class="feature-card" onclick="triggerInput('video-input')">
-            <input type="file" id="video-input" hidden accept="video/*" onchange="loadMedia(event, 'video')">
-            <i class="fas fa-file-video"></i>
-            <span>Add Video</span>
-        </div>
-        <div class="feature-card" onclick="applyFaceAI()">
-            <i class="fas fa-user-magic"></i>
-            <span>AI Face Fix</span>
-        </div>
-        <div class="feature-card" onclick="applyTransition()">
-            <i class="fas fa-bolt"></i>
-            <span>AI Effects</span>
-        </div>
-        <div class="feature-card" onclick="navToAbout()">
-            <i class="fas fa-info-circle"></i>
-            <span>Project Info</span>
-        </div>
-    </div>
-
-    <div class="timeline-area">
-        <h6 class="small text-white-50 mb-3"><i class="fas fa-stream me-2"></i>TIMELINE TRACKS</h6>
-        <div class="track"><span class="track-label">V1</span><div class="clip" id="v-clip" style="display:none;"></div></div>
-        <div class="track" style="border-color: #ff00ff;"><span class="track-label">A1</span><div class="clip" style="background: #8e2de2; width: 80%;"></div></div>
-        <div class="track" style="border-color: #f7ff00;"><span class="track-label">T1</span><div class="clip" style="background: #f7971e; width: 40%;"></div></div>
-    </div>
+    <nav class="bottom-nav">
+        <a href="javascript:void(0)" class="nav-link active" onclick="navTo('editor', this)"><i class="fas fa-film"></i>Editor</a>
+        <a href="javascript:void(0)" class="nav-link" onclick="navTo('about', this)"><i class="fas fa-info-circle"></i>About</a>
+    </nav>
 
     <script>
-        const HF_TOKEN = "YOUR_TOKEN_HERE"; // Put your Hugging Face token
+        // Hugging Face Config
+        const HF_TOKEN = "YOUR_TOKEN_HERE"; 
+        const MODEL_URL = "https://api-inference.huggingface.co/models/TencentARC/GFPGAN";
 
-        function triggerInput(id) { document.getElementById(id).click(); }
+        async function processFaceAI() {
+            const fileInput = document.getElementById('face-input');
+            const loader = document.getElementById('ai-loader');
+            const output = document.getElementById('output-image');
+            const placeholder = document.getElementById('placeholder-content');
 
-        function loadMedia(event, type) {
-            const file = event.target.files[0];
-            const video = document.getElementById('main-video-preview');
-            const emptyMsg = document.getElementById('empty-msg');
-            const clip = document.getElementById('v-clip');
+            if (!fileInput.files[0]) return alert("Please select a photo!");
 
-            if (file) {
-                const url = URL.createObjectURL(file);
-                video.src = url;
-                video.style.display = 'block';
-                emptyMsg.style.display = 'none';
-                clip.style.display = 'block';
-                alert("Media Loaded to Timeline!");
+            loader.style.display = 'flex';
+            placeholder.style.display = 'none';
+
+            try {
+                const response = await fetch(MODEL_URL, {
+                    headers: { Authorization: `Bearer ${HF_TOKEN}` },
+                    method: "POST",
+                    body: fileInput.files[0],
+                });
+                const blob = await response.blob();
+                output.src = URL.createObjectURL(blob);
+                output.style.display = 'block';
+                loader.style.display = 'none';
+                alert("Success: Face Enhanced at Barabanki Lab!");
+            } catch (e) {
+                alert("AI Error: Check connection.");
+                loader.style.display = 'none';
             }
         }
 
-        async function applyFaceAI() {
-            // Filmora Jaisa Face Enhancement Logic
-            const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
-            
-            // Simulating AI Processing from Barabanki Server
+        function generateVideoAI() {
+            // Text to Video Simulation
+            document.getElementById('ai-loader').style.display = 'flex';
             setTimeout(() => {
-                loader.style.display = 'none';
-                alert("AI Face Enhancement Applied Successfully! (Processed in Barabanki Lab)");
-            }, 3000);
-        }
-
-        function exportFinal() {
-            const btn = event.target;
-            btn.innerHTML = "RENDERING...";
-            setTimeout(() => {
-                btn.innerHTML = "EXPORT";
-                alert("Video Exported in 4K! Saved to Barabanki Cloud.");
+                document.getElementById('ai-loader').style.display = 'none';
+                alert("AI Reel Ready in Barabanki lab.");
             }, 4000);
         }
 
-        function navToAbout() {
-            alert("Sachin Tech Pro AI\nDeveloper: Professional Engineer\nLocation: Barabanki, UP\nStatus: AdSense Enabled");
+        function navTo(id, el) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            el.classList.add('active');
         }
+
+        function exportReel() { alert("Rendering 4K MP4..."); }
     </script>
 </body>
 </html>
