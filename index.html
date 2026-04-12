@@ -81,11 +81,10 @@
     </div>
 
     <div class="content-section">
-        <h2>Digital Office Automation in Barabanki</h2>
-        <p>Humara platform Uttar Pradesh ke digital mission ko support karta hai. Hum provide karte hain secure aur fast document handling tools jo kisi bhi office employee ke liye upyogi hain.</p>
-        
-        <h3>Privacy Focused Processing</h3>
-        <p>Aapki security hamari priority hai. Saari processing aapke browser mein hoti hai, iska matlab hai ki aapka data kabhi hamare server tak nahi pahunchta. Ye ise 100% safe banata hai.</p>
+        <h2>About Digital Office Tools</h2>
+        <p>Hamara mission Barabanki aur UP ke offices ko digitalize karna hai. Hum ensure karte hain ki aapke documents safe rahein aur aapka kaam fast ho.</p>
+        <h3>Safe & Secure</h3>
+        <p>Ye tools browser-based hain, isliye aapka data hamare server par save nahi hota. Aap nishchint hokar tools use kar sakte hain.</p>
     </div>
 </div>
 
@@ -93,39 +92,41 @@
     <div class="footer-links">
         <a href="about.html">About Us</a> | 
         <a href="privacy.html">Privacy Policy</a> | 
-        <a href="https://github.com/sachinmishra90/sachinmishra90.github.io/issues" target="_blank">Contact Us</a>
+        <a href="contact.html">Contact Us</a>
     </div>
     <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
-        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (ECE Engineer) | Barabanki, UP
+        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (Engineer) | Barabanki, UP
     </p>
 </footer>
 
 <script>
-    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+    const { PDFDocument, rgb } = PDFLib;
 
     async function compressPDF() {
         const file = document.getElementById('compressPdfIn').files[0];
-        if (!file) return alert("File select karein!");
-        const doc = await PDFDocument.load(await file.arrayBuffer());
-        const bytes = await doc.save({ useObjectStreams: true });
-        save(bytes, "Compressed_Office_Doc.pdf");
+        if (!file) return alert("Select PDF!");
+        try {
+            const doc = await PDFDocument.load(await file.arrayBuffer());
+            const bytes = await doc.save({ useObjectStreams: true });
+            save(bytes, "Compressed_Office.pdf");
+        } catch(e) { alert("Error: File badi ho sakti hai!"); }
     }
 
     async function runMerge() {
         const files = document.getElementById('mergeIn').files;
-        if (files.length < 2) return alert("Min 2 files required!");
+        if (files.length < 2) return alert("Min 2 files!");
         const doc = await PDFDocument.create();
         for (const f of files) {
             const pdf = await PDFDocument.load(await f.arrayBuffer());
             const pages = await doc.copyPages(pdf, pdf.getPageIndices());
             pages.forEach(p => doc.addPage(p));
         }
-        save(await doc.save(), "Merged_Office_Doc.pdf");
+        save(await doc.save(), "Merged_Office.pdf");
     }
 
     function runImgToPdf() {
         const files = document.getElementById('imgIn').files;
-        if (files.length === 0) return alert("Select images!");
+        if (files.length === 0) return alert("Select Images!");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         const readers = Array.from(files).map(f => new Promise(res => {
@@ -135,7 +136,7 @@
         }));
         Promise.all(readers).then(urls => {
             urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
-            pdf.save("Images_to_Office_PDF.pdf");
+            pdf.save("Images_to_PDF.pdf");
         });
     }
 
@@ -143,7 +144,8 @@
         const blob = new Blob([bytes], { type: "application/pdf" });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = name; link.click();
+        link.download = name;
+        link.click();
     }
 </script>
 
