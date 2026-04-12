@@ -3,224 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barabanki PDF Hub | Professional Digital Solutions</title>
+    <title>Digital Office Management | Barabanki</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     
     <style>
         :root {
-            --ilovepdf-red: #e74c3c;
-            --ilovepdf-dark: #33333b;
-            --agency-blue: #0170B9;
-            --bg-light: #f3f0f0;
+            --primary: #2563eb; /* Professional Blue */
+            --secondary: #dc2626; /* Action Red */
+            --dark: #0f172a;
+            --surface: #ffffff;
+            --bg: #f1f5f9;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg-light); color: var(--ilovepdf-dark); }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
 
-        /* Header & Navbar */
-        .top-nav { background: var(--ilovepdf-dark); color: white; padding: 10px 5%; display: flex; justify-content: space-between; font-size: 13px; }
-        .top-nav a { color: #ffeb3b; text-decoration: none; font-weight: 600; }
-
-        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 28px; font-weight: 800; color: var(--ilovepdf-red); cursor: pointer; }
-        .logo span { color: var(--ilovepdf-dark); }
+        /* Navigation */
+        nav {
+            background: var(--surface); padding: 15px 5%; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .brand { font-size: 22px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
+        .brand span { color: var(--primary); }
 
         /* Hero */
-        .hero { background: white; padding: 40px 5% 80px; text-align: center; }
-        .hero h1 { font-size: 38px; color: var(--ilovepdf-dark); margin-bottom: 10px; }
-        .hero p { color: #666; font-size: 18px; }
+        .hero {
+            background: var(--surface); padding: 80px 5%; text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
+        .hero p { color: #64748b; font-size: 18px; max-width: 600px; margin: 0 auto; }
 
-        /* Tools Grid - iLovePDF Style */
-        .tools-wrapper { max-width: 1400px; margin: -50px auto 40px; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        /* Main Grid */
+        .container { max-width: 1400px; margin: -40px auto 60px; padding: 0 20px; }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
 
         .tool-card {
-            background: white; padding: 20px; border-radius: 10px; text-align: left;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05); transition: 0.3s;
-            border: 1px solid #eee; cursor: pointer; position: relative; overflow: hidden;
+            background: var(--surface); padding: 25px; border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: 0.3s;
+            border: 1px solid #e2e8f0; display: flex; flex-direction: column;
         }
-        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--ilovepdf-red); }
-        .tool-card i { font-size: 35px; margin-bottom: 15px; display: block; }
-        .tool-card h3 { font-size: 16px; margin: 0 0 10px; color: #333; }
-        .tool-card p { font-size: 12px; color: #777; line-height: 1.4; margin-bottom: 15px; }
-
-        /* Tool Inputs & Buttons */
-        input[type="file"] { width: 100%; font-size: 11px; margin-bottom: 10px; }
-        .tool-btn { 
-            background: var(--ilovepdf-red); color: white; border: none; padding: 8px 15px; 
-            border-radius: 5px; font-weight: 600; cursor: pointer; width: 100%; font-size: 12px;
+        .tool-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            border-color: var(--primary);
         }
-        .tool-btn:hover { background: #c0392b; }
 
-        /* Agency Promo Section */
-        .agency-section {
-            background: linear-gradient(rgba(1, 112, 185, 0.9), rgba(1, 112, 185, 0.9)), url('https://websproindia.in/wp-content/uploads/2023/04/bg-01.jpg');
-            color: white; padding: 60px 10%; border-radius: 20px; margin: 40px 20px; text-align: center;
+        .icon-box { 
+            width: 50px; height: 50px; background: #eff6ff; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-bottom: 20px; color: var(--primary);
         }
-        .agency-btn { background: white; color: var(--agency-blue); padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 20px; }
 
-        footer { background: var(--ilovepdf-dark); color: white; padding: 50px 5%; text-align: center; }
+        .tool-card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
+        .tool-card p { font-size: 13px; color: #64748b; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
+
+        /* Action UI */
+        .file-select { font-size: 12px; margin-bottom: 10px; width: 100%; }
+        .input-text { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 10px; font-size: 13px; box-sizing: border-box; }
+        
+        .btn-run {
+            background: var(--primary); color: white; border: none; padding: 10px;
+            border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .btn-run:hover { background: #1d4ed8; }
+
+        /* Agency Banner */
+        .agency-footer {
+            background: var(--dark); color: white; border-radius: 16px;
+            padding: 50px; margin-top: 60px; display: flex; flex-wrap: wrap;
+            justify-content: space-between; align-items: center; gap: 30px;
+        }
+        .agency-content h2 { font-size: 30px; margin: 0 0 10px; }
+        .agency-content p { opacity: 0.7; max-width: 500px; }
+        .call-btn {
+            background: var(--primary); color: white; padding: 15px 35px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+        }
+
+        footer { text-align: center; padding: 40px; color: #64748b; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <span>📍 Location: Barabanki, Uttar Pradesh</span>
-    <span>📞 Tech Help: <a href="tel:9140989522">9140989522</a></span>
-</div>
-
-<header>
-    <div class="logo">iLove<span>PDF</span>-Clone</div>
-    <nav style="font-weight: 600; display: flex; gap: 20px; font-size: 14px;">
-        <span>CONVERT</span> | <span>MERGE</span> | <span>EDIT</span>
-    </nav>
-</header>
+<nav>
+    <div class="brand">DIGITAL<span>OFFICE</span></div>
+    <div style="font-size: 13px; font-weight: 600; color: #64748b;">📍 Barabanki, UP</div>
+</nav>
 
 <div class="hero">
-    <h1>Every tool you need to work with PDFs in one place</h1>
-    <p>100% free and easy to use. Merge, split, compress, convert and more!</p>
+    <h1>Digital Office Management</h1>
+    <p>Professional utility tools for advanced document processing and automation.</p>
 </div>
 
-<div class="tools-wrapper">
-    <div class="grid">
+<div class="container">
+    <div class="tool-grid">
         
         <div class="tool-card">
-            <i style="color: #e74c3c;">🔗</i>
+            <div class="icon-box">🔗</div>
             <h3>Merge PDF</h3>
-            <p>Combine multiple PDFs into one document easily.</p>
-            <input type="file" id="mergeInput" accept=".pdf" multiple>
-            <button class="tool-btn" onclick="mergePDFs()">Merge Now</button>
+            <p>Combine multiple reports or documents into a single PDF file.</p>
+            <input type="file" id="mergeIn" class="file-select" accept=".pdf" multiple>
+            <button class="btn-run" onclick="runMerge()">Merge Files</button>
         </div>
 
         <div class="tool-card">
-            <i style="color: #3498db;">🖼️</i>
-            <h3>JPG to PDF</h3>
-            <p>Convert JPG images to PDF in seconds.</p>
-            <input type="file" id="jpgInput" accept="image/*" multiple>
-            <button class="tool-btn" onclick="jpgToPdf()">Convert Now</button>
-        </div>
-
-        <div class="tool-card">
-            <i style="color: #f1c40f;">📉</i>
-            <h3>Compress PDF</h3>
-            <p>Reduce file size while optimizing quality.</p>
-            <input type="file" id="compressPdfInput" accept=".pdf">
-            <button class="tool-btn" onclick="alert('Feature processing...')">Compress</button>
-        </div>
-
-        <div class="tool-card">
-            <i style="color: #9b59b6;">🏷️</i>
-            <h3>Watermark</h3>
-            <p>Stamp an image or text over your PDF.</p>
-            <input type="file" id="wmInput" accept=".pdf">
-            <input type="text" id="wmText" placeholder="Watermark Text" style="width:100%; margin-bottom:5px; font-size:12px;">
-            <button class="tool-btn" onclick="addWatermark()">Add Stamp</button>
-        </div>
-
-        <div class="tool-card">
-            <i style="color: #e67e22;">🔒</i>
-            <h3>Protect PDF</h3>
-            <p>Encrypt your PDF with a password.</p>
-            <input type="file" id="lockInput" accept=".pdf">
-            <button class="tool-btn" onclick="alert('Security logic loading...')">Lock PDF</button>
-        </div>
-
-        <div class="tool-card">
-            <i style="color: #2ecc71;">🔄</i>
-            <h3>Rotate PDF</h3>
-            <p>Rotate your PDF pages as you need.</p>
-            <button class="tool-btn" onclick="alert('Select file to rotate')">Rotate</button>
-        </div>
-
-        <div class="tool-card">
-            <i style="color: #e74c3c;">✂️</i>
+            <div class="icon-box">✂️</div>
             <h3>Split PDF</h3>
-            <p>Extract pages from your PDF file.</p>
-            <button class="tool-btn">Split Now</button>
+            <p>Extract a specific page from a large document instantly.</p>
+            <input type="file" id="splitIn" class="file-select" accept=".pdf">
+            <input type="number" id="splitPage" class="input-text" placeholder="Page Number">
+            <button class="btn-run" onclick="runSplit()">Extract Now</button>
         </div>
 
         <div class="tool-card">
-            <i style="color: #1abc9c;">📸</i>
-            <h3>PDF to JPG</h3>
-            <p>Extract all images from a PDF.</p>
-            <button class="tool-btn">Extract JPG</button>
+            <div class="icon-box">🖼️</div>
+            <h3>Image to PDF</h3>
+            <p>Convert office scans and images into organized PDF docs.</p>
+            <input type="file" id="imgIn" class="file-select" accept="image/*" multiple>
+            <button class="btn-run" onclick="runImgToPdf()">Convert PDF</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon-box">🛡️</div>
+            <h3>Security Stamp</h3>
+            <p>Add "CONFIDENTIAL" or custom watermark to your PDF.</p>
+            <input type="file" id="wmIn" class="file-select" accept=".pdf">
+            <input type="text" id="wmTxt" class="input-text" placeholder="Stamp Text">
+            <button class="btn-run" onclick="runWatermark()">Apply Stamp</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon-box">📉</div>
+            <h3>File Optimizer</h3>
+            <p>Reduce image size for faster office email sharing.</p>
+            <input type="file" id="compIn" class="file-select" accept="image/*">
+            <input type="number" id="compQ" class="input-text" value="70" placeholder="Quality %">
+            <button class="btn-run" onclick="runCompress()">Optimize</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon-box">🔄</div>
+            <h3>Rotate PDF</h3>
+            <p>Fix the orientation of scanned office documents.</p>
+            <input type="file" class="file-select" disabled>
+            <button class="btn-run" style="background:#94a3b8">In Development</button>
         </div>
 
     </div>
 
-    <div class="agency-section">
-        <h2>Professional App & Web Development in Barabanki</h2>
-        <p>Hume sirf tools banana nahi, complex business solutions deliver karna aata hai. 10k+ Trust members ke network ke saath hum Barabanki ki sabse fast-growing agency hain.</p>
-        <a href="tel:9140989522" class="agency-btn">Contact Developer: 9140989522</a>
+    <div class="agency-footer">
+        <div class="agency-content">
+            <h2>Need Custom Enterprise Software?</h2>
+            <p>Hum Barabanki mein based ek professional engineering agency hain. Agar aapko apne office ke liye custom automation tools ya website chahiye, toh aaj hi call karein.</p>
+        </div>
+        <a href="tel:9140989522" class="call-btn">Contact: 9140989522</a>
     </div>
 </div>
 
 <footer>
-    <p><b>Barabanki, Uttar Pradesh, India</b></p>
-    <p>Helpline: +91 9140989522 | Support 24/7</p>
-    <div style="margin-top: 20px; opacity: 0.5; font-size: 12px;">
-        &copy; 2026 iLovePDF Clone by Digital Experts. No data stored on server.
-    </div>
+    <p><b>Digital Office Management Suite</b></p>
+    <p>Barabanki, Uttar Pradesh | Powered by Professional Engineering</p>
+    <p style="margin-top:20px; opacity:0.5; font-size:12px;">&copy; 2026 Digital Hub. High-speed client-side processing.</p>
 </footer>
 
 <script>
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-    // 1. MERGE PDF LOGIC
-    async function mergePDFs() {
-        const input = document.getElementById('mergeInput').files;
-        if (input.length < 2) return alert("Select at least 2 PDFs!");
-        const mergedPdf = await PDFDocument.create();
-        for (const file of input) {
-            const pdf = await PDFDocument.load(await file.arrayBuffer());
-            const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-            pages.forEach(p => mergedPdf.addPage(p));
+    async function runMerge() {
+        const files = document.getElementById('mergeIn').files;
+        if (files.length < 2) return alert("Select 2+ PDFs");
+        const doc = await PDFDocument.create();
+        for (const f of files) {
+            const pdf = await PDFDocument.load(await f.arrayBuffer());
+            const pages = await doc.copyPages(pdf, pdf.getPageIndices());
+            pages.forEach(p => doc.addPage(p));
         }
-        const bytes = await mergedPdf.save();
-        download(bytes, "Merged_Barabanki.pdf", "application/pdf");
+        save(await doc.save(), "Merged_Office_Doc.pdf");
     }
 
-    // 2. JPG TO PDF LOGIC
-    function jpgToPdf() {
-        const files = document.getElementById('jpgInput').files;
-        if (files.length === 0) return alert("Select images!");
+    async function runSplit() {
+        const f = document.getElementById('splitIn').files[0];
+        const pNum = parseInt(document.getElementById('splitPage').value);
+        if (!f || !pNum) return alert("Details missing");
+        const pdf = await PDFDocument.load(await f.arrayBuffer());
+        if (pNum > pdf.getPageCount()) return alert("Invalid page");
+        const newDoc = await PDFDocument.create();
+        const [page] = await newDoc.copyPages(pdf, [pNum - 1]);
+        newDoc.addPage(page);
+        save(await newDoc.save(), `Page_${pNum}_Extracted.pdf`);
+    }
+
+    function runImgToPdf() {
+        const files = document.getElementById('imgIn').files;
+        if (files.length === 0) return alert("Select images");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
-        const promises = Array.from(files).map(f => new Promise(res => {
+        const readers = Array.from(files).map(f => new Promise(res => {
             const r = new FileReader();
             r.onload = e => res(e.target.result);
             r.readAsDataURL(f);
         }));
-        Promise.all(promises).then(dataUrls => {
-            dataUrls.forEach((url, i) => {
-                if (i > 0) pdf.addPage();
-                pdf.addImage(url, 'JPEG', 10, 10, 190, 150);
-            });
-            pdf.save("Converted_Images.pdf");
+        Promise.all(readers).then(urls => {
+            urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
+            pdf.save("Office_Images.pdf");
         });
     }
 
-    // 3. WATERMARK LOGIC
-    async function addWatermark() {
-        const file = document.getElementById('wmInput').files[0];
-        const text = document.getElementById('wmText').value;
-        if (!file || !text) return alert("File & Text required!");
-        const pdfDoc = await PDFDocument.load(await file.arrayBuffer());
-        const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-        pdfDoc.getPages().forEach(p => {
-            p.drawText(text, { x: 50, y: 50, size: 50, font, color: rgb(0.9, 0.1, 0.1), opacity: 0.3, rotate: PDFLib.degrees(45) });
+    async function runWatermark() {
+        const f = document.getElementById('wmIn').files[0];
+        const t = document.getElementById('wmTxt').value;
+        if (!f || !t) return alert("Missing info");
+        const doc = await PDFDocument.load(await f.arrayBuffer());
+        const font = await doc.embedFont(StandardFonts.HelveticaBold);
+        doc.getPages().forEach(p => {
+            p.drawText(t, { x: 50, y: 50, size: 50, font, color: rgb(0.7, 0.7, 0.7), opacity: 0.3, rotate: PDFLib.degrees(45) });
         });
-        download(await pdfDoc.save(), "Watermarked_Hub.pdf", "application/pdf");
+        save(await doc.save(), "Watermarked_Office.pdf");
     }
 
-    function download(bytes, name, type) {
-        const blob = new Blob([bytes], { type: type });
+    function runCompress() {
+        const f = document.getElementById('compIn').files[0];
+        const q = document.getElementById('compQ').value / 100;
+        if (!f) return alert("Select image");
+        const r = new FileReader();
+        r.onload = e => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+                const cvs = document.createElement('canvas');
+                cvs.width = img.width; cvs.height = img.height;
+                cvs.getContext('2d').drawImage(img, 0, 0);
+                const a = document.createElement('a');
+                a.href = cvs.toDataURL('image/jpeg', q);
+                a.download = "Compressed_Office.jpg"; a.click();
+            };
+        };
+        r.readAsDataURL(f);
+    }
+
+    function save(bytes, name) {
+        const blob = new Blob([bytes], { type: "application/pdf" });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = name;
-        link.click();
+        link.download = name; link.click();
     }
 </script>
 
