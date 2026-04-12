@@ -3,203 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expert Web & Utility Solutions | Barabanki</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
+    <title>Web & App Development Services | Barabanki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0170B9;
-            --dark: #1a1a1a;
-            --accent: #ffeb3b;
-            --gray: #f4f7f6;
+            --dark: #222;
+            --light: #f9f9f9;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background: var(--gray);
+            background: var(--light);
             color: var(--dark);
         }
 
-        /* Agency Style Top Bar */
-        .top-info {
-            background: var(--dark);
+        /* Top Header Contact */
+        .header-contact {
+            background: var(--primary);
             color: white;
             padding: 10px 5%;
-            font-size: 13px;
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
+            font-size: 14px;
         }
-
-        .top-info a { color: var(--accent); text-decoration: none; }
 
         header {
             background: white;
-            padding: 15px 5%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .brand { font-size: 26px; font-weight: 700; color: var(--primary); }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); }
 
-        /* Hero Section with Professional Look */
-        .hero {
-            background: linear-gradient(rgba(1, 112, 185, 0.9), rgba(1, 112, 185, 0.9)), 
-                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            color: white;
-            padding: 80px 5%;
-            text-align: center;
-        }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
-        .hero h1 { font-size: 42px; margin-bottom: 10px; }
-
-        .main-content {
-            max-width: 1200px;
-            margin: -50px auto 40px;
-            padding: 0 20px;
-        }
-
-        /* Ad Slots (Clean & Integrated) */
-        .ad-placeholder {
-            background: #fff;
-            margin: 20px 0;
-            padding: 15px;
-            text-align: center;
-            border: 1px dashed var(--primary);
-            color: #999;
-            border-radius: 8px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .service-card {
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border-top: 5px solid var(--primary);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        h2 { color: var(--primary); margin-top: 0; }
+
+        /* Compressor Styles */
+        .controls { margin: 20px 0; }
+        input[type="range"] { width: 100%; cursor: pointer; }
+        .quality-val { font-weight: bold; color: var(--primary); }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
             transition: 0.3s;
         }
 
-        .service-card:hover { transform: translateY(-10px); }
-
-        .service-card h3 { color: var(--primary); margin-bottom: 15px; }
-
-        input, textarea, button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            font-family: inherit;
-        }
-
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        button:hover { background: #015a96; }
+        .btn:hover { background: #015a96; }
 
         footer {
             background: var(--dark);
             color: white;
-            padding: 50px 5% 20px;
+            padding: 40px 5%;
             text-align: center;
+            margin-top: 50px;
         }
 
-        .contact-box {
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+        .footer-info { margin-bottom: 20px; opacity: 0.8; }
     </style>
 </head>
 <body>
 
-<div class="top-info">
-    <span>📍 Location: Barabanki, Uttar Pradesh</span>
-    <span>📞 Support: <a href="tel:+919140989522">+91 9140989522</a></span>
+<div class="header-contact">
+    <span>📍 Barabanki, Uttar Pradesh</span>
+    <span>📞 Call Us: <a href="tel:+919140989522" style="color:white; text-decoration:none;">+91 9140989522</a></span>
 </div>
 
 <header>
-    <div class="brand">WEB & APP EXPERTS</div>
-    <nav>Services | Tools | Portfolio | Contact</nav>
+    <div class="logo">Web & App Experts</div>
+    <nav>Home | Services | Tools | Contact</nav>
 </header>
 
-<div class="hero">
-    <h1>Innovative Digital Solutions</h1>
-    <p>We build high-performance websites and mobile apps tailored for your business.</p>
-</div>
-
-<div class="main-content">
-    <div class="ad-placeholder">Ad Space (Top Banner)</div>
-
-    <div class="services-grid">
-        <div class="service-card">
-            <h3>🌐 Web Development</h3>
-            <p>Custom HTML5, JavaScript aur professional business websites ke liye humse sampark karein.</p>
-            <button onclick="window.location.href='tel:9140989522'">Get a Quote</button>
-        </div>
-
-        <div class="service-card">
-            <h3>📄 Image to PDF Tool</h3>
-            <p>Professional document conversion tool.</p>
-            <input type="file" id="imgInp" accept="image/*">
-            <button onclick="makePDF()">Convert Now</button>
-        </div>
-
-        <div class="service-card">
-            <h3>📱 App Development</h3>
-            <p>Android aur iOS apps ke liye Barabanki ki sabse behtar service.</p>
-            <button onclick="window.location.href='tel:9140989522'">Consult Experts</button>
-        </div>
+<div class="container">
+    
+    <div class="card">
+        <h2>Custom Web & App Development</h2>
+        <p>Hum Barabanki mein professional website aur android apps banate hain. Apne business ko online le jaane ke liye aaj hi sampark karein.</p>
+        <button class="btn" onclick="window.location.href='tel:9140989522'">Consult with Expert</button>
     </div>
 
-    <div class="ad-placeholder">Ad Space (In-feed)</div>
+    <div class="card">
+        <h2>🖼️ Smart Image Compressor</h2>
+        <p>Apni image select karein aur niche slider se quality adjust karein (Low quality = Small size).</p>
+        
+        <input type="file" id="upload" accept="image/*" style="margin-bottom: 15px;">
+        
+        <div class="controls">
+            <label>Compression Quality: <span id="qLabel" class="quality-val">80%</span></label>
+            <input type="range" id="quality" min="1" max="100" value="80">
+        </div>
+
+        <button class="btn" onclick="compressImage()">Compress & Download</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
 </div>
 
 <footer>
-    <div class="contact-box">
-        <h3>Contact Us</h3>
-        <p>Huda Colony, Barabanki, Uttar Pradesh, 225001</p>
-        <p>Phone: +91 9140989522 | Email: info@yourdomain.com</p>
+    <div class="footer-info">
+        <h3>Contact Office</h3>
+        <p>Barabanki, Uttar Pradesh, India</p>
+        <p>Helpline: +91 9140989522</p>
     </div>
-    <p>&copy; 2026 Professional Web Solutions. All Rights Reserved.</p>
+    <p>&copy; 2026 Professional IT Solutions. All Rights Reserved.</p>
 </footer>
 
 <script>
-    function makePDF() {
-        const { jsPDF } = window.jspdf;
-        const input = document.getElementById('imgInp');
-        if (!input.files[0]) return alert("Please select an image first!");
-        
+    // Slider Value Update
+    const qualitySlider = document.getElementById('quality');
+    const qLabel = document.getElementById('qLabel');
+    
+    qualitySlider.oninput = function() {
+        qLabel.innerHTML = this.value + "%";
+    }
+
+    function compressImage() {
+        const fileInput = document.getElementById('upload');
+        const quality = document.getElementById('quality').value / 100;
+
+        if (fileInput.files.length === 0) {
+            alert("Pehle image select karein!");
+            return;
+        }
+
         const reader = new FileReader();
-        reader.onload = function(e) {
-            const pdf = new jsPDF();
-            pdf.addImage(e.target.result, 'JPEG', 10, 10, 190, 140);
-            pdf.save("document_barabanki.pdf");
-        };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(fileInput.files[0]);
+        reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+
+                // Manual Quality Selection using toDataURL
+                const compressedData = canvas.toDataURL('image/jpeg', quality);
+                
+                const link = document.createElement('a');
+                link.href = compressedData;
+                link.download = "compressed-image-barabanki.jpg";
+                link.click();
+            }
+        }
     }
 </script>
 
