@@ -36,81 +36,115 @@
         }
         .btn-compress { background: var(--secondary); }
 
-        /* Content Sections for AdSense */
         .content-section { background: #fff; padding: 50px 10%; margin-top: 40px; border-radius: 16px; border: 1px solid #e2e8f0; }
         .content-section h2 { color: var(--primary); border-left: 5px solid var(--primary); padding-left: 15px; }
         
         footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; margin-top: 60px; }
-        .footer-links a { color: #94a3b8; text-decoration: none; margin: 0 10px; font-size: 14px; }
-        .footer-links a:hover { color: white; }
+        .footer-links a { color: #94a3b8; text-decoration: none; margin: 0 10px; font-size: 14px; transition: 0.3s; }
+        .footer-links a:hover { color: white; text-decoration: underline; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#" class="brand">DIGITAL<span>OFFICE</span></a>
+    <a href="index.html" class="brand">DIGITAL<span>OFFICE</span></a>
     <div style="font-weight: 600; color: #64748b;">Barabanki, UP</div>
 </nav>
 
 <div class="hero">
     <h1>Digital Office Management</h1>
-    <p>Professional document automation and utility tools designed for efficiency and privacy.</p>
+    <p>Professional document automation tools designed for Indian offices, schools, and trusts.</p>
 </div>
 
 <div class="container">
     <div class="tool-grid">
         <div class="tool-card" style="border-top: 4px solid var(--secondary);">
             <h3>Compress PDF</h3>
-            <p>PDF file size kam karein bina quality khoye.</p>
-            <input type="file" id="compressPdfIn" accept=".pdf" style="margin-bottom:10px;">
-            <button class="btn btn-compress" onclick="compressPDF()">Compress Now</button>
+            <p>PDF file ka size kam karein bina quality khoye.</p>
+            <input type="file" id="compressPdfIn" accept=".pdf" style="margin-bottom:10px; width: 100%;">
+            <button class="btn btn-compress" onclick="compressPDF()">Compress PDF</button>
         </div>
 
         <div class="tool-card" style="border-top: 4px solid var(--primary);">
             <h3>Merge PDF</h3>
-            <p>Multiple files ko ek professional PDF mein jodein.</p>
-            <input type="file" id="mergeIn" accept=".pdf" multiple style="margin-bottom:10px;">
+            <p>Multiple files ko ek document mein jodein.</p>
+            <input type="file" id="mergeIn" accept=".pdf" multiple style="margin-bottom:10px; width: 100%;">
             <button class="btn" onclick="runMerge()">Merge Files</button>
         </div>
         
-        <div class="tool-card">
+        <div class="tool-card" style="border-top: 4px solid #10b981;">
             <h3>Images to PDF</h3>
-            <p>Photos aur Scans ko PDF document mein badlein.</p>
-            <input type="file" id="imgIn" accept="image/*" multiple style="margin-bottom:10px;">
-            <button class="btn" onclick="runImgToPdf()">Convert Now</button>
+            <p>Photos ko professional PDF mein convert karein.</p>
+            <input type="file" id="imgIn" accept="image/*" multiple style="margin-bottom:10px; width: 100%;">
+            <button class="btn" onclick="runImgToPdf()">Convert Images</button>
         </div>
     </div>
 
     <div class="content-section">
-        <h2>About Our Digital Office Tools</h2>
-        <p>Digital Office Management ek innovative platform hai jo Barabanki aur Uttar Pradesh ke professionals ki madad ke liye banaya gaya hai. Humara maqsad hai office workflows ko digitalize karna aur document handling ko asaan banana.</p>
+        <h2>Digital Office Automation in Barabanki</h2>
+        <p>Humara platform Uttar Pradesh ke digital mission ko support karta hai. Hum provide karte hain secure aur fast document handling tools jo kisi bhi office employee ke liye upyogi hain.</p>
         
-        <h3>Privacy & Security</h3>
-        <p>Hum samajhte hain ki office documents sensitive hote hain. Isliye hamari website **Client-Side Processing** technique ka use karti hai. Iska matlab hai ki aapki koi bhi file hamare server par upload nahi hoti; saara kaam aapke browser mein hi hota hai.</p>
-
-        <h3>How to use these tools?</h3>
-        <ul>
-            <li><b>PDF Compression:</b> Apni file select karein aur hamara algorithm use optimize kar dega, jo sarkari portals aur emails ke liye best hai.</li>
-            <li><b>Safe Merging:</b> Multiple reports ko ek PDF mein jodne ke liye Merge tool ka use karein.</li>
-        </ul>
+        <h3>Privacy Focused Processing</h3>
+        <p>Aapki security hamari priority hai. Saari processing aapke browser mein hoti hai, iska matlab hai ki aapka data kabhi hamare server tak nahi pahunchta. Ye ise 100% safe banata hai.</p>
     </div>
 </div>
 
 <footer>
     <div class="footer-links">
-        <a href="#">About Us</a> | 
-        <a href="#">Privacy Policy</a> | 
-        <a href="#">Terms of Service</a> | 
-        <a href="#">Contact Us</a>
+        <a href="about.html">About Us</a> | 
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="https://github.com/sachinmishra90/sachinmishra90.github.io/issues" target="_blank">Contact Us</a>
     </div>
     <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
-        &copy; 2026 Digital Office Management | Developed by Sachin Mishra (Engineer) | Barabanki, UP
+        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (ECE Engineer) | Barabanki, UP
     </p>
 </footer>
 
 <script>
-    // --- Logic functions (Merge, Compress, ImgToPdf) yahan same rahenge ---
-    // (Pichle code wala JS logic yahan paste karein)
+    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+
+    async function compressPDF() {
+        const file = document.getElementById('compressPdfIn').files[0];
+        if (!file) return alert("File select karein!");
+        const doc = await PDFDocument.load(await file.arrayBuffer());
+        const bytes = await doc.save({ useObjectStreams: true });
+        save(bytes, "Compressed_Office_Doc.pdf");
+    }
+
+    async function runMerge() {
+        const files = document.getElementById('mergeIn').files;
+        if (files.length < 2) return alert("Min 2 files required!");
+        const doc = await PDFDocument.create();
+        for (const f of files) {
+            const pdf = await PDFDocument.load(await f.arrayBuffer());
+            const pages = await doc.copyPages(pdf, pdf.getPageIndices());
+            pages.forEach(p => doc.addPage(p));
+        }
+        save(await doc.save(), "Merged_Office_Doc.pdf");
+    }
+
+    function runImgToPdf() {
+        const files = document.getElementById('imgIn').files;
+        if (files.length === 0) return alert("Select images!");
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        const readers = Array.from(files).map(f => new Promise(res => {
+            const r = new FileReader();
+            r.onload = e => res(e.target.result);
+            r.readAsDataURL(f);
+        }));
+        Promise.all(readers).then(urls => {
+            urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
+            pdf.save("Images_to_Office_PDF.pdf");
+        });
+    }
+
+    function save(bytes, name) {
+        const blob = new Blob([bytes], { type: "application/pdf" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = name; link.click();
+    }
 </script>
 
 </body>
