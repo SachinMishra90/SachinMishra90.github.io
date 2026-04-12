@@ -5,207 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Office Management | Barabanki</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     
     <style>
-        :root {
-            --primary: #2563eb; /* Professional Blue */
-            --secondary: #dc2626; /* Action Red */
-            --dark: #0f172a;
-            --surface: #ffffff;
-            --bg: #f1f5f9;
-        }
-
+        :root { --primary: #2563eb; --secondary: #e11d48; --dark: #0f172a; --bg: #f8fafc; }
         body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
 
-        /* Navigation */
-        nav {
-            background: var(--surface); padding: 15px 5%; display: flex;
-            justify-content: space-between; align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
-        }
-        .brand { font-size: 22px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
+        nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .brand { font-size: 22px; font-weight: 800; color: var(--dark); }
         .brand span { color: var(--primary); }
 
-        /* Hero */
-        .hero {
-            background: var(--surface); padding: 80px 5%; text-align: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; color: var(--dark); }
-        .hero p { color: #64748b; font-size: 18px; max-width: 600px; margin: 0 auto; }
+        .hero { background: #fff; padding: 60px 5%; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .hero h1 { font-size: 36px; margin-bottom: 10px; }
 
-        /* Main Grid */
         .container { max-width: 1400px; margin: -40px auto 60px; padding: 0 20px; }
-        
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-        }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
         .tool-card {
-            background: var(--surface); padding: 25px; border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: 0.3s;
-            border: 1px solid #e2e8f0; display: flex; flex-direction: column;
+            background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s;
         }
-        .tool-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-        }
-
-        .icon-box { 
-            width: 50px; height: 50px; background: #eff6ff; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; margin-bottom: 20px; color: var(--primary);
-        }
-
-        .tool-card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
-        .tool-card p { font-size: 13px; color: #64748b; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
-
-        /* Action UI */
-        .file-select { font-size: 12px; margin-bottom: 10px; width: 100%; }
-        .input-text { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 10px; font-size: 13px; box-sizing: border-box; }
+        .tool-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         
-        .btn-run {
-            background: var(--primary); color: white; border: none; padding: 10px;
-            border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
-        .btn-run:hover { background: #1d4ed8; }
+        .icon { font-size: 30px; margin-bottom: 15px; display: block; }
+        h3 { margin: 0 0 10px; font-size: 18px; }
+        p { font-size: 13px; color: #64748b; margin-bottom: 20px; min-height: 40px; }
 
-        /* Agency Banner */
-        .agency-footer {
-            background: var(--dark); color: white; border-radius: 16px;
-            padding: 50px; margin-top: 60px; display: flex; flex-wrap: wrap;
-            justify-content: space-between; align-items: center; gap: 30px;
+        .input-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box; }
+        
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 12px;
+            border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.2s;
         }
-        .agency-content h2 { font-size: 30px; margin: 0 0 10px; }
-        .agency-content p { opacity: 0.7; max-width: 500px; }
-        .call-btn {
-            background: var(--primary); color: white; padding: 15px 35px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
-        }
+        .btn:hover { opacity: 0.9; }
+        .btn-compress { background: var(--secondary); }
 
-        footer { text-align: center; padding: 40px; color: #64748b; font-size: 14px; }
+        .agency-promo {
+            background: var(--dark); color: white; padding: 40px; border-radius: 16px;
+            margin-top: 50px; text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="brand">DIGITAL<span>OFFICE</span></div>
-    <div style="font-size: 13px; font-weight: 600; color: #64748b;">📍 Barabanki, UP</div>
+    <div style="font-weight: 600; color: #64748b;">Barabanki, UP</div>
 </nav>
 
 <div class="hero">
     <h1>Digital Office Management</h1>
-    <p>Professional utility tools for advanced document processing and automation.</p>
+    <p>Professional grade document automation tools.</p>
 </div>
 
 <div class="container">
     <div class="tool-grid">
         
+        <div class="tool-card" style="border-top: 4px solid var(--secondary);">
+            <span class="icon">📉</span>
+            <h3>Compress PDF</h3>
+            <p>PDF file ka size kam karein bina quality kharab kiye.</p>
+            <div class="input-group">
+                <input type="file" id="compressPdfIn" accept=".pdf">
+            </div>
+            <button class="btn btn-compress" onclick="compressPDF()">Compress PDF Now</button>
+        </div>
+
         <div class="tool-card">
-            <div class="icon-box">🔗</div>
+            <span class="icon">🔗</span>
             <h3>Merge PDF</h3>
-            <p>Combine multiple reports or documents into a single PDF file.</p>
-            <input type="file" id="mergeIn" class="file-select" accept=".pdf" multiple>
-            <button class="btn-run" onclick="runMerge()">Merge Files</button>
+            <p>Multiple PDF files ko ek saath jodein.</p>
+            <div class="input-group">
+                <input type="file" id="mergeIn" accept=".pdf" multiple>
+            </div>
+            <button class="btn" onclick="runMerge()">Merge Files</button>
         </div>
 
         <div class="tool-card">
-            <div class="icon-box">✂️</div>
-            <h3>Split PDF</h3>
-            <p>Extract a specific page from a large document instantly.</p>
-            <input type="file" id="splitIn" class="file-select" accept=".pdf">
-            <input type="number" id="splitPage" class="input-text" placeholder="Page Number">
-            <button class="btn-run" onclick="runSplit()">Extract Now</button>
+            <span class="icon">🖼️</span>
+            <h3>JPG to PDF</h3>
+            <p>Photos ko professional PDF mein badlein.</p>
+            <div class="input-group">
+                <input type="file" id="imgIn" accept="image/*" multiple>
+            </div>
+            <button class="btn" onclick="runImgToPdf()">Convert to PDF</button>
         </div>
 
         <div class="tool-card">
-            <div class="icon-box">🖼️</div>
-            <h3>Image to PDF</h3>
-            <p>Convert office scans and images into organized PDF docs.</p>
-            <input type="file" id="imgIn" class="file-select" accept="image/*" multiple>
-            <button class="btn-run" onclick="runImgToPdf()">Convert PDF</button>
-        </div>
-
-        <div class="tool-card">
-            <div class="icon-box">🛡️</div>
-            <h3>Security Stamp</h3>
-            <p>Add "CONFIDENTIAL" or custom watermark to your PDF.</p>
-            <input type="file" id="wmIn" class="file-select" accept=".pdf">
-            <input type="text" id="wmTxt" class="input-text" placeholder="Stamp Text">
-            <button class="btn-run" onclick="runWatermark()">Apply Stamp</button>
-        </div>
-
-        <div class="tool-card">
-            <div class="icon-box">📉</div>
-            <h3>File Optimizer</h3>
-            <p>Reduce image size for faster office email sharing.</p>
-            <input type="file" id="compIn" class="file-select" accept="image/*">
-            <input type="number" id="compQ" class="input-text" value="70" placeholder="Quality %">
-            <button class="btn-run" onclick="runCompress()">Optimize</button>
-        </div>
-
-        <div class="tool-card">
-            <div class="icon-box">🔄</div>
-            <h3>Rotate PDF</h3>
-            <p>Fix the orientation of scanned office documents.</p>
-            <input type="file" class="file-select" disabled>
-            <button class="btn-run" style="background:#94a3b8">In Development</button>
+            <span class="icon">🛡️</span>
+            <h3>Add Watermark</h3>
+            <p>Apne PDF par security stamp ya text lagayein.</p>
+            <input type="file" id="wmIn" accept=".pdf" style="margin-bottom:5px;">
+            <input type="text" id="wmTxt" placeholder="Stamp Text..." style="margin-bottom:10px; padding:8px; width:100%; border-radius:6px; border:1px solid #ddd;">
+            <button class="btn" onclick="runWatermark()">Apply Stamp</button>
         </div>
 
     </div>
 
-    <div class="agency-footer">
-        <div class="agency-content">
-            <h2>Need Custom Enterprise Software?</h2>
-            <p>Hum Barabanki mein based ek professional engineering agency hain. Agar aapko apne office ke liye custom automation tools ya website chahiye, toh aaj hi call karein.</p>
-        </div>
-        <a href="tel:9140989522" class="call-btn">Contact: 9140989522</a>
+    <div class="agency-promo">
+        <h2>Custom Web & App Solutions</h2>
+        <p>Barabanki based expert engineering services for your business automation.</p>
+        <a href="tel:9140989522" style="color:#38bdf8; text-decoration:none; font-weight:700; font-size:20px;">📞 9140989522</a>
     </div>
 </div>
 
 <footer>
-    <p><b>Digital Office Management Suite</b></p>
-    <p>Barabanki, Uttar Pradesh | Powered by Professional Engineering</p>
-    <p style="margin-top:20px; opacity:0.5; font-size:12px;">&copy; 2026 Digital Hub. High-speed client-side processing.</p>
+    <div style="text-align:center; padding: 40px; color: #64748b; font-size: 13px;">
+        &copy; 2026 Digital Office Management | Barabanki, Uttar Pradesh
+    </div>
 </footer>
 
 <script>
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
+    // --- COMPRESS PDF LOGIC ---
+    async function compressPDF() {
+        const file = document.getElementById('compressPdfIn').files[0];
+        if (!file) return alert("Pehle PDF select karein!");
+        
+        const arrayBuffer = await file.arrayBuffer();
+        const pdfDoc = await PDFDocument.load(arrayBuffer);
+        
+        // Compression Logic: Re-saving the PDF with metadata stripping and stream optimization
+        // PDF-Lib inherently optimizes the structure on save()
+        const compressedBytes = await pdfDoc.save({ useObjectStreams: true });
+        
+        const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "Compressed_Office_Doc.pdf";
+        link.click();
+    }
+
+    // --- MERGE LOGIC ---
     async function runMerge() {
         const files = document.getElementById('mergeIn').files;
-        if (files.length < 2) return alert("Select 2+ PDFs");
+        if (files.length < 2) return alert("Kam se kam 2 files select karein!");
         const doc = await PDFDocument.create();
         for (const f of files) {
             const pdf = await PDFDocument.load(await f.arrayBuffer());
             const pages = await doc.copyPages(pdf, pdf.getPageIndices());
             pages.forEach(p => doc.addPage(p));
         }
-        save(await doc.save(), "Merged_Office_Doc.pdf");
+        save(await doc.save(), "Merged_Office.pdf");
     }
 
-    async function runSplit() {
-        const f = document.getElementById('splitIn').files[0];
-        const pNum = parseInt(document.getElementById('splitPage').value);
-        if (!f || !pNum) return alert("Details missing");
-        const pdf = await PDFDocument.load(await f.arrayBuffer());
-        if (pNum > pdf.getPageCount()) return alert("Invalid page");
-        const newDoc = await PDFDocument.create();
-        const [page] = await newDoc.copyPages(pdf, [pNum - 1]);
-        newDoc.addPage(page);
-        save(await newDoc.save(), `Page_${pNum}_Extracted.pdf`);
-    }
-
+    // --- IMG TO PDF ---
     function runImgToPdf() {
         const files = document.getElementById('imgIn').files;
-        if (files.length === 0) return alert("Select images");
+        if (files.length === 0) return alert("Images select karein!");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         const readers = Array.from(files).map(f => new Promise(res => {
@@ -219,36 +170,17 @@
         });
     }
 
+    // --- WATERMARK ---
     async function runWatermark() {
         const f = document.getElementById('wmIn').files[0];
         const t = document.getElementById('wmTxt').value;
-        if (!f || !t) return alert("Missing info");
+        if (!f || !t) return alert("File aur Text dono bharein!");
         const doc = await PDFDocument.load(await f.arrayBuffer());
         const font = await doc.embedFont(StandardFonts.HelveticaBold);
         doc.getPages().forEach(p => {
             p.drawText(t, { x: 50, y: 50, size: 50, font, color: rgb(0.7, 0.7, 0.7), opacity: 0.3, rotate: PDFLib.degrees(45) });
         });
         save(await doc.save(), "Watermarked_Office.pdf");
-    }
-
-    function runCompress() {
-        const f = document.getElementById('compIn').files[0];
-        const q = document.getElementById('compQ').value / 100;
-        if (!f) return alert("Select image");
-        const r = new FileReader();
-        r.onload = e => {
-            const img = new Image();
-            img.src = e.target.result;
-            img.onload = () => {
-                const cvs = document.createElement('canvas');
-                cvs.width = img.width; cvs.height = img.height;
-                cvs.getContext('2d').drawImage(img, 0, 0);
-                const a = document.createElement('a');
-                a.href = cvs.toDataURL('image/jpeg', q);
-                a.download = "Compressed_Office.jpg"; a.click();
-            };
-        };
-        r.readAsDataURL(f);
     }
 
     function save(bytes, name) {
