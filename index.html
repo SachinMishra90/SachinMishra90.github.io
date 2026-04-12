@@ -3,52 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Office Management | Professional Utility Tools Barabanki</title>
+    <title>Digital Office Management | Data Grid & Utility Tools</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.3.1/html-docx.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary: #2563eb; --secondary: #e11d48; --dark: #0f172a; --bg: #f8fafc; }
+        :root { --primary: #2563eb; --secondary: #e11d48; --dark: #0f172a; --bg: #f8fafc; --success: #10b981; }
         body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--dark); line-height: 1.6; }
-
         nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
         .brand { font-size: 22px; font-weight: 800; color: var(--dark); text-decoration: none; }
         .brand span { color: var(--primary); }
-
-        .hero { background: #fff; padding: 60px 5%; text-align: center; border-bottom: 1px solid #e2e8f0; }
-        .hero h1 { font-size: 36px; margin-bottom: 10px; color: var(--dark); }
-        .hero p { color: #64748b; max-width: 600px; margin: 0 auto; }
-
-        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; }
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-
-        .tool-card {
-            background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s;
-        }
-        .tool-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: 20px auto 60px; padding: 0 20px; }
         
-        .btn {
-            background: var(--primary); color: white; border: none; padding: 12px;
-            border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.2s;
-        }
-        .btn-compress { background: var(--secondary); }
-
-        /* Visitor Counter Styling */
-        .counter-box {
-            background: #e0f2fe; color: #0369a1; padding: 20px; border-radius: 12px;
-            text-align: center; margin: 30px auto; border: 2px dashed #0369a1; max-width: 400px;
-        }
-        #public-visitor-count { font-size: 20px; font-weight: 800; display: block; }
-
-        .content-section { background: #fff; padding: 50px 10%; margin-top: 40px; border-radius: 16px; border: 1px solid #e2e8f0; }
-        .content-section h2 { color: var(--primary); border-left: 5px solid var(--primary); padding-left: 15px; }
+        /* Grid Tool Styling */
+        .tool-section { background: #fff; padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
+        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; outline: none; }
+        th { background: #f1f5f9; color: var(--dark); font-weight: 700; }
+        td:focus { background: #eff6ff; border: 1px solid var(--primary); }
         
-        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; margin-top: 60px; }
-        .footer-links a { color: #94a3b8; text-decoration: none; margin: 0 10px; font-size: 14px; transition: 0.3s; }
-        .footer-links a:hover { color: white; text-decoration: underline; }
+        .action-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn { border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; color: white; }
+        .btn-blue { background: var(--primary); }
+        .btn-green { background: var(--success); }
+        .btn-red { background: var(--secondary); }
+        
+        .counter-box { background: #e0f2fe; color: #0369a1; padding: 15px; border-radius: 12px; text-align: center; margin-top: 20px; border: 2px dashed #0369a1; }
+        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; }
+        .footer-links a { color: #94a3b8; text-decoration: none; margin: 0 10px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -58,46 +45,44 @@
     <div style="font-weight: 600; color: #64748b;">Barabanki, UP</div>
 </nav>
 
-<div class="hero">
-    <h1>Digital Office Management</h1>
-    <p>Professional document automation tools designed for Indian offices, schools, and trusts.</p>
-</div>
-
 <div class="container">
-    <div class="tool-grid">
-        <div class="tool-card" style="border-top: 4px solid var(--secondary);">
-            <h3>Compress PDF</h3>
-            <p>PDF file ka size kam karein bina quality khoye.</p>
-            <input type="file" id="compressPdfIn" accept=".pdf" style="margin-bottom:10px; width: 100%;">
-            <button class="btn btn-compress" onclick="compressPDF()">Compress PDF</button>
+    <div class="tool-section">
+        <div class="grid-header">
+            <h2>Data Grid: Edit & Export</h2>
+            <button class="btn btn-blue" onclick="addRow()">+ Add Row</button>
+        </div>
+        <p style="font-size: 14px; color: #64748b; margin-bottom: 15px;">Niche diye gaye table mein data bharein aur kisi bhi format mein download karein.</p>
+        
+        <div style="overflow-x: auto;">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th contenteditable="true">S.No</th>
+                        <th contenteditable="true">Description</th>
+                        <th contenteditable="true">Amount/Data</th>
+                        <th contenteditable="true">Remarks</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td contenteditable="true">1</td>
+                        <td contenteditable="true">Sample Task</td>
+                        <td contenteditable="true">100</td>
+                        <td contenteditable="true">Completed</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="tool-card" style="border-top: 4px solid var(--primary);">
-            <h3>Merge PDF</h3>
-            <p>Multiple files ko ek document mein jodein.</p>
-            <input type="file" id="mergeIn" accept=".pdf" multiple style="margin-bottom:10px; width: 100%;">
-            <button class="btn" onclick="runMerge()">Merge Files</button>
-        </div>
-        
-        <div class="tool-card" style="border-top: 4px solid #10b981;">
-            <h3>Images to PDF</h3>
-            <p>Photos ko professional PDF mein convert karein.</p>
-            <input type="file" id="imgIn" accept="image/*" multiple style="margin-bottom:10px; width: 100%;">
-            <button class="btn" onclick="runImgToPdf()">Convert Images</button>
+        <div class="action-btns">
+            <button class="btn btn-green" onclick="exportExcel()">Download Excel</button>
+            <button class="btn btn-blue" onclick="exportWord()">Download Word</button>
+            <button class="btn btn-red" onclick="exportPDF()">Download PDF</button>
         </div>
     </div>
 
     <div class="counter-box">
-        <span id="public-visitor-count">Connecting to engine...</span>
-        <p style="font-size: 12px; margin: 5px 0 0 0; color: #0c4a6e;">Reliable & Secure Data Management</p>
-    </div>
-
-    <div class="content-section">
-        <h2>Digital Office Automation in Barabanki</h2>
-        <p>Humara platform Uttar Pradesh ke digital mission ko support karta hai. Hum provide karte hain secure aur fast document handling tools jo kisi bhi office employee ke liye upyogi hain.</p>
-        
-        <h3>Privacy Focused Processing</h3>
-        <p>Aapki security hamari priority hai. Saari processing aapke browser mein hoti hai, iska matlab hai ki aapka data kabhi hamare server tak nahi pahunchta.</p>
+        <span id="public-visitor-count">Loading Visitor Engine...</span>
     </div>
 </div>
 
@@ -108,56 +93,59 @@
         <a href="contact.html">Contact Us</a>
     </div>
     <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
-        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (ECE Engineer) | Barabanki, UP
+        &copy; 2026 Digital Office Management | Engineer Sachin Mishra | Barabanki, UP
     </p>
 </footer>
 
 <script src="Visitor details.js"></script>
 
 <script>
-    const { PDFDocument, rgb, StandardFonts } = PDFLib;
-
-    async function compressPDF() {
-        const file = document.getElementById('compressPdfIn').files[0];
-        if (!file) return alert("File select karein!");
-        const doc = await PDFDocument.load(await file.arrayBuffer());
-        const bytes = await doc.save({ useObjectStreams: true });
-        save(bytes, "Compressed_Office_Doc.pdf");
+    // 1. Add New Row Logic
+    function addRow() {
+        const tbody = document.getElementById('tableBody');
+        const row = document.createElement('tr');
+        row.innerHTML = `<td contenteditable="true">${tbody.rows.length + 1}</td>
+                         <td contenteditable="true"></td><td contenteditable="true"></td>
+                         <td contenteditable="true"></td>`;
+        tbody.appendChild(row);
     }
 
-    async function runMerge() {
-        const files = document.getElementById('mergeIn').files;
-        if (files.length < 2) return alert("Min 2 files required!");
-        const doc = await PDFDocument.create();
-        for (const f of files) {
-            const pdf = await PDFDocument.load(await f.arrayBuffer());
-            const pages = await doc.copyPages(pdf, pdf.getPageIndices());
-            pages.forEach(p => doc.addPage(p));
-        }
-        save(await doc.save(), "Merged_Office_Doc.pdf");
+    // 2. Export to Excel (SheetJS)
+    function exportExcel() {
+        const table = document.getElementById("dataTable");
+        const wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, "Office_Data_Barabanki.xlsx");
     }
 
-    function runImgToPdf() {
-        const files = document.getElementById('imgIn').files;
-        if (files.length === 0) return alert("Select images!");
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        const readers = Array.from(files).map(f => new Promise(res => {
-            const r = new FileReader();
-            r.onload = e => res(e.target.result);
-            r.readAsDataURL(f);
-        }));
-        Promise.all(readers).then(urls => {
-            urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
-            pdf.save("Images_to_Office_PDF.pdf");
-        });
-    }
-
-    function save(bytes, name) {
-        const blob = new Blob([bytes], { type: "application/pdf" });
+    // 3. Export to Word (HTML-Docx)
+    function exportWord() {
+        const content = document.getElementById("dataTable").outerHTML;
+        const converted = htmlDocx.asBlob(`<html><body>${content}</body></html>`);
         const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = name; link.click();
+        link.href = URL.createObjectURL(converted);
+        link.download = "Office_Report.docx";
+        link.click();
+    }
+
+    // 4. Export to PDF (jsPDF)
+    function exportPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text("Digital Office Management - Data Report", 10, 10);
+        
+        // Simple Table Extraction for PDF
+        let y = 20;
+        const rows = document.querySelectorAll("#dataTable tr");
+        rows.forEach(row => {
+            let x = 10;
+            const cells = row.querySelectorAll("th, td");
+            cells.forEach(cell => {
+                doc.text(cell.innerText, x, y);
+                x += 40;
+            });
+            y += 10;
+        });
+        doc.save("Office_Data.pdf");
     }
 </script>
 
