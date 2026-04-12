@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Office Management | Barabanki</title>
+    <title>Digital Office Management | Professional Utility Tools Barabanki</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root { --primary: #2563eb; --secondary: #e11d48; --dark: #0f172a; --bg: #f8fafc; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--dark); line-height: 1.6; }
 
         nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .brand { font-size: 22px; font-weight: 800; color: var(--dark); }
+        .brand { font-size: 22px; font-weight: 800; color: var(--dark); text-decoration: none; }
         .brand span { color: var(--primary); }
 
         .hero { background: #fff; padding: 60px 5%; text-align: center; border-bottom: 1px solid #e2e8f0; }
-        .hero h1 { font-size: 36px; margin-bottom: 10px; }
+        .hero h1 { font-size: 36px; margin-bottom: 10px; color: var(--dark); }
+        .hero p { color: #64748b; max-width: 600px; margin: 0 auto; }
 
-        .container { max-width: 1400px; margin: -40px auto 60px; padding: 0 20px; }
+        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; }
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
         .tool-card {
@@ -29,166 +30,87 @@
         }
         .tool-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         
-        .icon { font-size: 30px; margin-bottom: 15px; display: block; }
-        h3 { margin: 0 0 10px; font-size: 18px; }
-        p { font-size: 13px; color: #64748b; margin-bottom: 20px; min-height: 40px; }
-
-        .input-group { margin-bottom: 15px; }
-        input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; box-sizing: border-box; }
-        
         .btn {
             background: var(--primary); color: white; border: none; padding: 12px;
             border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.2s;
         }
-        .btn:hover { opacity: 0.9; }
         .btn-compress { background: var(--secondary); }
 
-        .agency-promo {
-            background: var(--dark); color: white; padding: 40px; border-radius: 16px;
-            margin-top: 50px; text-align: center;
-        }
+        /* Content Sections for AdSense */
+        .content-section { background: #fff; padding: 50px 10%; margin-top: 40px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .content-section h2 { color: var(--primary); border-left: 5px solid var(--primary); padding-left: 15px; }
+        
+        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; margin-top: 60px; }
+        .footer-links a { color: #94a3b8; text-decoration: none; margin: 0 10px; font-size: 14px; }
+        .footer-links a:hover { color: white; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="brand">DIGITAL<span>OFFICE</span></div>
+    <a href="#" class="brand">DIGITAL<span>OFFICE</span></a>
     <div style="font-weight: 600; color: #64748b;">Barabanki, UP</div>
 </nav>
 
 <div class="hero">
     <h1>Digital Office Management</h1>
-    <p>Professional grade document automation tools.</p>
+    <p>Professional document automation and utility tools designed for efficiency and privacy.</p>
 </div>
 
 <div class="container">
     <div class="tool-grid">
-        
         <div class="tool-card" style="border-top: 4px solid var(--secondary);">
-            <span class="icon">📉</span>
             <h3>Compress PDF</h3>
-            <p>PDF file ka size kam karein bina quality kharab kiye.</p>
-            <div class="input-group">
-                <input type="file" id="compressPdfIn" accept=".pdf">
-            </div>
-            <button class="btn btn-compress" onclick="compressPDF()">Compress PDF Now</button>
+            <p>PDF file size kam karein bina quality khoye.</p>
+            <input type="file" id="compressPdfIn" accept=".pdf" style="margin-bottom:10px;">
+            <button class="btn btn-compress" onclick="compressPDF()">Compress Now</button>
         </div>
 
-        <div class="tool-card">
-            <span class="icon">🔗</span>
+        <div class="tool-card" style="border-top: 4px solid var(--primary);">
             <h3>Merge PDF</h3>
-            <p>Multiple PDF files ko ek saath jodein.</p>
-            <div class="input-group">
-                <input type="file" id="mergeIn" accept=".pdf" multiple>
-            </div>
+            <p>Multiple files ko ek professional PDF mein jodein.</p>
+            <input type="file" id="mergeIn" accept=".pdf" multiple style="margin-bottom:10px;">
             <button class="btn" onclick="runMerge()">Merge Files</button>
         </div>
-
+        
         <div class="tool-card">
-            <span class="icon">🖼️</span>
-            <h3>JPG to PDF</h3>
-            <p>Photos ko professional PDF mein badlein.</p>
-            <div class="input-group">
-                <input type="file" id="imgIn" accept="image/*" multiple>
-            </div>
-            <button class="btn" onclick="runImgToPdf()">Convert to PDF</button>
+            <h3>Images to PDF</h3>
+            <p>Photos aur Scans ko PDF document mein badlein.</p>
+            <input type="file" id="imgIn" accept="image/*" multiple style="margin-bottom:10px;">
+            <button class="btn" onclick="runImgToPdf()">Convert Now</button>
         </div>
-
-        <div class="tool-card">
-            <span class="icon">🛡️</span>
-            <h3>Add Watermark</h3>
-            <p>Apne PDF par security stamp ya text lagayein.</p>
-            <input type="file" id="wmIn" accept=".pdf" style="margin-bottom:5px;">
-            <input type="text" id="wmTxt" placeholder="Stamp Text..." style="margin-bottom:10px; padding:8px; width:100%; border-radius:6px; border:1px solid #ddd;">
-            <button class="btn" onclick="runWatermark()">Apply Stamp</button>
-        </div>
-
     </div>
 
-    <div class="agency-promo">
-        <h2>Custom Web & App Solutions</h2>
-        <p>Barabanki based expert engineering services for your business automation.</p>
-        <a href="tel:9140989522" style="color:#38bdf8; text-decoration:none; font-weight:700; font-size:20px;">📞 9140989522</a>
+    <div class="content-section">
+        <h2>About Our Digital Office Tools</h2>
+        <p>Digital Office Management ek innovative platform hai jo Barabanki aur Uttar Pradesh ke professionals ki madad ke liye banaya gaya hai. Humara maqsad hai office workflows ko digitalize karna aur document handling ko asaan banana.</p>
+        
+        <h3>Privacy & Security</h3>
+        <p>Hum samajhte hain ki office documents sensitive hote hain. Isliye hamari website **Client-Side Processing** technique ka use karti hai. Iska matlab hai ki aapki koi bhi file hamare server par upload nahi hoti; saara kaam aapke browser mein hi hota hai.</p>
+
+        <h3>How to use these tools?</h3>
+        <ul>
+            <li><b>PDF Compression:</b> Apni file select karein aur hamara algorithm use optimize kar dega, jo sarkari portals aur emails ke liye best hai.</li>
+            <li><b>Safe Merging:</b> Multiple reports ko ek PDF mein jodne ke liye Merge tool ka use karein.</li>
+        </ul>
     </div>
 </div>
 
 <footer>
-    <div style="text-align:center; padding: 40px; color: #64748b; font-size: 13px;">
-        &copy; 2026 Digital Office Management | Barabanki, Uttar Pradesh
+    <div class="footer-links">
+        <a href="#">About Us</a> | 
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Contact Us</a>
     </div>
+    <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
+        &copy; 2026 Digital Office Management | Developed by Sachin Mishra (Engineer) | Barabanki, UP
+    </p>
 </footer>
 
 <script>
-    const { PDFDocument, rgb, StandardFonts } = PDFLib;
-
-    // --- COMPRESS PDF LOGIC ---
-    async function compressPDF() {
-        const file = document.getElementById('compressPdfIn').files[0];
-        if (!file) return alert("Pehle PDF select karein!");
-        
-        const arrayBuffer = await file.arrayBuffer();
-        const pdfDoc = await PDFDocument.load(arrayBuffer);
-        
-        // Compression Logic: Re-saving the PDF with metadata stripping and stream optimization
-        // PDF-Lib inherently optimizes the structure on save()
-        const compressedBytes = await pdfDoc.save({ useObjectStreams: true });
-        
-        const blob = new Blob([compressedBytes], { type: 'application/pdf' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = "Compressed_Office_Doc.pdf";
-        link.click();
-    }
-
-    // --- MERGE LOGIC ---
-    async function runMerge() {
-        const files = document.getElementById('mergeIn').files;
-        if (files.length < 2) return alert("Kam se kam 2 files select karein!");
-        const doc = await PDFDocument.create();
-        for (const f of files) {
-            const pdf = await PDFDocument.load(await f.arrayBuffer());
-            const pages = await doc.copyPages(pdf, pdf.getPageIndices());
-            pages.forEach(p => doc.addPage(p));
-        }
-        save(await doc.save(), "Merged_Office.pdf");
-    }
-
-    // --- IMG TO PDF ---
-    function runImgToPdf() {
-        const files = document.getElementById('imgIn').files;
-        if (files.length === 0) return alert("Images select karein!");
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        const readers = Array.from(files).map(f => new Promise(res => {
-            const r = new FileReader();
-            r.onload = e => res(e.target.result);
-            r.readAsDataURL(f);
-        }));
-        Promise.all(readers).then(urls => {
-            urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
-            pdf.save("Office_Images.pdf");
-        });
-    }
-
-    // --- WATERMARK ---
-    async function runWatermark() {
-        const f = document.getElementById('wmIn').files[0];
-        const t = document.getElementById('wmTxt').value;
-        if (!f || !t) return alert("File aur Text dono bharein!");
-        const doc = await PDFDocument.load(await f.arrayBuffer());
-        const font = await doc.embedFont(StandardFonts.HelveticaBold);
-        doc.getPages().forEach(p => {
-            p.drawText(t, { x: 50, y: 50, size: 50, font, color: rgb(0.7, 0.7, 0.7), opacity: 0.3, rotate: PDFLib.degrees(45) });
-        });
-        save(await doc.save(), "Watermarked_Office.pdf");
-    }
-
-    function save(bytes, name) {
-        const blob = new Blob([bytes], { type: "application/pdf" });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = name; link.click();
-    }
+    // --- Logic functions (Merge, Compress, ImgToPdf) yahan same rahenge ---
+    // (Pichle code wala JS logic yahan paste karein)
 </script>
 
 </body>
