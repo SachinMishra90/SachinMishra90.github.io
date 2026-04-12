@@ -3,123 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional PDF & Image Tools | Barabanki</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Professional Web & PDF Solutions | Barabanki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
-        :root { --primary: #0170B9; --dark: #333; --bg: #f4f4f9; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: var(--dark); }
-        
-        .top-nav { background: var(--dark); color: white; padding: 10px 5%; font-size: 14px; display: flex; justify-content: space-between; }
-        header { background: white; padding: 15px 5%; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { color: var(--primary); font-size: 24px; font-weight: 600; }
+        :root { --primary: #0170B9; --dark: #1e1e1e; --red: #e74c3c; --bg: #f4f7f6; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
 
-        .main-container { max-width: 800px; margin: 40px auto; padding: 20px; }
-        .tool-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid var(--primary); }
-        
-        h2 { text-align: center; color: var(--primary); }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; }
-        
-        input[type="file"], input[type="number"] {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
-        }
+        .top-bar { background: var(--dark); color: white; padding: 10px 5%; display: flex; justify-content: space-between; font-size: 13px; }
+        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); }
 
-        .btn-convert {
-            background: var(--primary); color: white; border: none; width: 100%; padding: 15px;
-            font-size: 18px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-top: 10px;
-        }
-        .btn-convert:hover { background: #015a96; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #004e82 100%); color: white; padding: 50px 5% 80px; text-align: center; }
+        .container { max-width: 1200px; margin: -40px auto 40px; padding: 0 20px; }
 
-        footer { background: #222; color: white; text-align: center; padding: 30px; margin-top: 50px; }
-        .status { margin-top: 15px; font-weight: bold; text-align: center; color: #27ae60; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .tool-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--red); }
+        .tool-card h3 { color: var(--red); margin-top: 0; font-size: 18px; }
+        
+        .input-group { margin: 15px 0; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: inherit; }
+        
+        .btn { background: var(--red); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-blue { background: var(--primary); }
+
+        /* Agency Promo */
+        .agency-card { background: #fff; margin-top: 40px; padding: 30px; border-radius: 12px; border-left: 8px solid var(--primary); }
+
+        footer { background: #1a1a1a; color: white; padding: 30px 5%; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <span>📍 Barabanki, Uttar Pradesh</span>
-    <span>📞 Help: +91 9140989522</span>
+<div class="top-bar">
+    <span>📍 Location: Barabanki, Uttar Pradesh</span>
+    <span>📞 Support: +91 9140989522</span>
 </div>
 
 <header>
-    <div class="logo">WEB & APP EXPERTS</div>
+    <div class="logo">OFFICE TOOLS HUB</div>
+    <nav style="font-size: 14px; font-weight: 600;">PDF TOOLS | WEB SERVICES</nav>
 </header>
 
-<div class="main-container">
-    <div class="tool-card">
-        <h2>Smart PDF Converter</h2>
-        <p style="text-align: center; color: #666;">Image upload karein aur apna target PDF size set karein.</p>
+<div class="hero">
+    <h1>High-Performance PDF & Web Tools</h1>
+    <p>iLovePDF style power with Barabanki's best development support.</p>
+</div>
 
-        <div class="input-group">
-            <label>Select Image:</label>
-            <input type="file" id="imageInput" accept="image/*">
+<div class="container">
+    <div class="tools-grid">
+        
+        <div class="tool-card">
+            <h3>🖼️ Image to PDF</h3>
+            <div class="input-group">
+                <input type="file" id="imgInput" accept="image/*" multiple>
+            </div>
+            <button class="btn" onclick="imagesToPDF()">Convert to PDF</button>
         </div>
 
-        <div class="input-group">
-            <label>Target PDF Size (Approx KB):</label>
-            <input type="number" id="targetSize" placeholder="Example: 100" min="10">
+        <div class="tool-card" style="border-top-color: #27ae60;">
+            <h3 style="color: #27ae60;">📄 HTML/Text to PDF</h3>
+            <div class="input-group">
+                <textarea id="htmlInput" rows="3" placeholder="Yahan apna text ya HTML code likhein..."></textarea>
+            </div>
+            <button class="btn" style="background:#27ae60;" onclick="htmlToPDF()">Generate PDF</button>
         </div>
 
-        <button class="btn-convert" onclick="processAndConvert()">Convert & Download PDF</button>
-        <div id="statusMsg" class="status"></div>
+        <div class="tool-card" style="border-top-color: #f39c12;">
+            <h3 style="color: #f39c12;">📉 Image Compressor</h3>
+            <div class="input-group">
+                <input type="file" id="compInput" accept="image/*">
+                <label style="font-size: 12px;">Quality (1-100%):</label>
+                <input type="range" id="qRange" min="1" max="100" value="70">
+            </div>
+            <button class="btn" style="background:#f39c12;" onclick="compressImage()">Compress & Save</button>
+        </div>
+
+        <div class="tool-card" style="border-top-color: var(--primary);">
+            <h3 style="color: var(--primary);">🔗 Merge PDF</h3>
+            <p style="font-size:12px;">Multiple PDF files ko ek banane ke liye.</p>
+            <input type="file" accept=".pdf" multiple disabled>
+            <button class="btn btn-blue" onclick="alert('Merge feature integration next update mein!')">Coming Soon</button>
+        </div>
+
+    </div>
+
+    <div class="agency-card">
+        <h2 style="margin-top:0;">Need Custom App or Website?</h2>
+        <p>Hum Barabanki mein professional <b>App Development</b> aur <b>Web Solutions</b> provide karte hain. 10,000+ members ke network ke saath hum aapke business ko grow kar sakte hain.</p>
+        <button class="btn btn-blue" style="width: auto; padding: 12px 30px;" onclick="window.location.href='tel:9140989522'">Call Expert: 9140989522</button>
     </div>
 </div>
 
 <footer>
-    <p>Contact: +91 9140989522 | Barabanki, UP</p>
-    <p>&copy; 2026 Developed for Excellence</p>
+    <p>Barabanki, Uttar Pradesh | Helpline: +91 9140989522</p>
+    <p>&copy; 2026 Developed by Digital Experts</p>
 </footer>
 
+<div id="hidden-html" style="position: absolute; left: -9999px; padding: 20px; background: white; width: 500px;"></div>
+
 <script>
-    async function processAndConvert() {
-        const fileInput = document.getElementById('imageInput');
-        const targetSizeKB = document.getElementById('targetSize').value;
-        const statusMsg = document.getElementById('statusMsg');
+    const { jsPDF } = window.jspdf;
 
-        if (!fileInput.files[0] || !targetSizeKB) {
-            alert("Please select image and enter target size!");
-            return;
-        }
-
-        statusMsg.innerText = "Processing... Please wait.";
+    // 1. Image to PDF Logic
+    async function imagesToPDF() {
+        const input = document.getElementById('imgInput');
+        if (input.files.length === 0) return alert("Files select karein!");
         
-        const file = fileInput.files[0];
+        const pdf = new jsPDF();
+        for (let i = 0; i < input.files.length; i++) {
+            const imgData = await readFileAsDataURL(input.files[i]);
+            if (i > 0) pdf.addPage();
+            pdf.addImage(imgData, 'JPEG', 10, 10, 190, 150);
+        }
+        pdf.save("Images_Converted.pdf");
+    }
+
+    // 2. HTML to PDF Logic
+    function htmlToPDF() {
+        const content = document.getElementById('htmlInput').value;
+        if (!content) return alert("Content likhein!");
+        
+        const container = document.getElementById('hidden-html');
+        container.innerHTML = content;
+
+        html2canvas(container).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+            pdf.save("WebContent.pdf");
+            container.innerHTML = "";
+        });
+    }
+
+    // 3. Compression Logic
+    function compressImage() {
+        const input = document.getElementById('compInput');
+        const quality = document.getElementById('qRange').value / 100;
+        if (!input.files[0]) return alert("Image select karein!");
+
         const reader = new FileReader();
-
-        reader.onload = async function(event) {
+        reader.readAsDataURL(input.files[0]);
+        reader.onload = function(e) {
             const img = new Image();
-            img.src = event.target.result;
-
+            img.src = e.target.result;
             img.onload = function() {
                 const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
                 canvas.width = img.width;
                 canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
+                canvas.getContext('2d').drawImage(img, 0, 0);
+                const result = canvas.toDataURL('image/jpeg', quality);
+                const link = document.createElement('a');
+                link.href = result;
+                link.download = "Compressed_Image.jpg";
+                link.click();
+            }
+        }
+    }
 
-                // Logic: Target size ke hisaab se quality adjust karna
-                // Hum shuruat mein 0.7 quality rakhte hain, agar user ko chhota size chahiye toh ye aur kam ho jayegi
-                let quality = 0.8;
-                if (targetSizeKB < 100) quality = 0.5;
-                if (targetSizeKB < 50) quality = 0.3;
-
-                const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-                
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF();
-                
-                // Image ko PDF page size ke hisaab se fit karna
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                
-                pdf.addImage(compressedDataUrl, 'JPEG', 0, 0, pageWidth, pageHeight);
-                pdf.save(`Document_${targetSizeKB}KB.pdf`);
-                
-                statusMsg.innerText = "Success! Your PDF is downloaded.";
-            };
-        };
-        reader.readAsDataURL(file);
+    function readFileAsDataURL(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+        });
     }
 </script>
 
