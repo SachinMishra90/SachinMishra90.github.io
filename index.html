@@ -36,6 +36,13 @@
         }
         .btn-compress { background: var(--secondary); }
 
+        /* Visitor Counter Styling */
+        .counter-box {
+            background: #e0f2fe; color: #0369a1; padding: 20px; border-radius: 12px;
+            text-align: center; margin: 30px auto; border: 2px dashed #0369a1; max-width: 400px;
+        }
+        #public-visitor-count { font-size: 20px; font-weight: 800; display: block; }
+
         .content-section { background: #fff; padding: 50px 10%; margin-top: 40px; border-radius: 16px; border: 1px solid #e2e8f0; }
         .content-section h2 { color: var(--primary); border-left: 5px solid var(--primary); padding-left: 15px; }
         
@@ -80,11 +87,17 @@
         </div>
     </div>
 
+    <div class="counter-box">
+        <span id="public-visitor-count">Connecting to engine...</span>
+        <p style="font-size: 12px; margin: 5px 0 0 0; color: #0c4a6e;">Reliable & Secure Data Management</p>
+    </div>
+
     <div class="content-section">
-        <h2>About Digital Office Tools</h2>
-        <p>Hamara mission Barabanki aur UP ke offices ko digitalize karna hai. Hum ensure karte hain ki aapke documents safe rahein aur aapka kaam fast ho.</p>
-        <h3>Safe & Secure</h3>
-        <p>Ye tools browser-based hain, isliye aapka data hamare server par save nahi hota. Aap nishchint hokar tools use kar sakte hain.</p>
+        <h2>Digital Office Automation in Barabanki</h2>
+        <p>Humara platform Uttar Pradesh ke digital mission ko support karta hai. Hum provide karte hain secure aur fast document handling tools jo kisi bhi office employee ke liye upyogi hain.</p>
+        
+        <h3>Privacy Focused Processing</h3>
+        <p>Aapki security hamari priority hai. Saari processing aapke browser mein hoti hai, iska matlab hai ki aapka data kabhi hamare server tak nahi pahunchta.</p>
     </div>
 </div>
 
@@ -95,38 +108,38 @@
         <a href="contact.html">Contact Us</a>
     </div>
     <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
-        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (Engineer) | Barabanki, UP
+        &copy; 2026 Digital Office Management | Designed by Sachin Mishra (ECE Engineer) | Barabanki, UP
     </p>
 </footer>
 
+<script src="Visitor details.js"></script>
+
 <script>
-    const { PDFDocument, rgb } = PDFLib;
+    const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
     async function compressPDF() {
         const file = document.getElementById('compressPdfIn').files[0];
-        if (!file) return alert("Select PDF!");
-        try {
-            const doc = await PDFDocument.load(await file.arrayBuffer());
-            const bytes = await doc.save({ useObjectStreams: true });
-            save(bytes, "Compressed_Office.pdf");
-        } catch(e) { alert("Error: File badi ho sakti hai!"); }
+        if (!file) return alert("File select karein!");
+        const doc = await PDFDocument.load(await file.arrayBuffer());
+        const bytes = await doc.save({ useObjectStreams: true });
+        save(bytes, "Compressed_Office_Doc.pdf");
     }
 
     async function runMerge() {
         const files = document.getElementById('mergeIn').files;
-        if (files.length < 2) return alert("Min 2 files!");
+        if (files.length < 2) return alert("Min 2 files required!");
         const doc = await PDFDocument.create();
         for (const f of files) {
             const pdf = await PDFDocument.load(await f.arrayBuffer());
             const pages = await doc.copyPages(pdf, pdf.getPageIndices());
             pages.forEach(p => doc.addPage(p));
         }
-        save(await doc.save(), "Merged_Office.pdf");
+        save(await doc.save(), "Merged_Office_Doc.pdf");
     }
 
     function runImgToPdf() {
         const files = document.getElementById('imgIn').files;
-        if (files.length === 0) return alert("Select Images!");
+        if (files.length === 0) return alert("Select images!");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         const readers = Array.from(files).map(f => new Promise(res => {
@@ -136,7 +149,7 @@
         }));
         Promise.all(readers).then(urls => {
             urls.forEach((u, i) => { if (i > 0) pdf.addPage(); pdf.addImage(u, 'JPEG', 10, 10, 190, 150); });
-            pdf.save("Images_to_PDF.pdf");
+            pdf.save("Images_to_Office_PDF.pdf");
         });
     }
 
@@ -144,8 +157,7 @@
         const blob = new Blob([bytes], { type: "application/pdf" });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = name;
-        link.click();
+        link.download = name; link.click();
     }
 </script>
 
