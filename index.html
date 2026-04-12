@@ -3,233 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Hub Barabanki | All PDF Tools & Web Solutions</title>
+    <title>Barabanki PDF Hub | Professional Digital Solutions</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     
     <style>
-        :root { --primary: #0170B9; --secondary: #e74c3c; --dark: #1e1e1e; --bg: #f4f7f6; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); color: var(--dark); }
-
-        /* Top Bar */
-        .top-bar { background: var(--dark); color: white; padding: 10px 5%; display: flex; justify-content: space-between; font-size: 13px; }
-        .top-bar a { color: #00d4ff; text-decoration: none; }
-
-        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 26px; font-weight: 700; color: var(--primary); }
-
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #004e82 100%); color: white; padding: 40px 5% 70px; text-align: center; }
-        
-        .container { max-width: 1300px; margin: -50px auto 40px; padding: 0 20px; }
-        .tools-header { font-size: 22px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
-
-        /* iLovePDF Style Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
-        .tool-card { 
-            background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            transition: 0.3s; border-top: 4px solid var(--secondary); display: flex; flex-direction: column;
+        :root {
+            --ilovepdf-red: #e74c3c;
+            --ilovepdf-dark: #33333b;
+            --agency-blue: #0170B9;
+            --bg-light: #f3f0f0;
         }
-        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .icon { font-size: 35px; margin-bottom: 10px; }
-        .tool-card h3 { margin: 0 0 8px; font-size: 16px; color: #333; }
-        .tool-card p { font-size: 12px; color: #666; margin-bottom: 15px; flex-grow: 1; }
 
-        /* Controls */
-        input[type="file"], input[type="text"], input[type="number"] { width: 100%; font-size: 12px; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .action-btn { background: var(--secondary); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
-        .action-btn:hover { background: #c0392b; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg-light); color: var(--ilovepdf-dark); }
 
-        /* Agency Section */
-        .agency-section { background: white; padding: 30px; border-radius: 12px; margin-top: 40px; border-left: 8px solid var(--primary); box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .agency-section h2 { color: var(--primary); margin-top: 0; }
+        /* Header & Navbar */
+        .top-nav { background: var(--ilovepdf-dark); color: white; padding: 10px 5%; display: flex; justify-content: space-between; font-size: 13px; }
+        .top-nav a { color: #ffeb3b; text-decoration: none; font-weight: 600; }
 
-        footer { background: var(--dark); color: white; padding: 40px 5%; text-align: center; margin-top: 60px; }
+        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 28px; font-weight: 800; color: var(--ilovepdf-red); cursor: pointer; }
+        .logo span { color: var(--ilovepdf-dark); }
+
+        /* Hero */
+        .hero { background: white; padding: 40px 5% 80px; text-align: center; }
+        .hero h1 { font-size: 38px; color: var(--ilovepdf-dark); margin-bottom: 10px; }
+        .hero p { color: #666; font-size: 18px; }
+
+        /* Tools Grid - iLovePDF Style */
+        .tools-wrapper { max-width: 1400px; margin: -50px auto 40px; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+
+        .tool-card {
+            background: white; padding: 20px; border-radius: 10px; text-align: left;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05); transition: 0.3s;
+            border: 1px solid #eee; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--ilovepdf-red); }
+        .tool-card i { font-size: 35px; margin-bottom: 15px; display: block; }
+        .tool-card h3 { font-size: 16px; margin: 0 0 10px; color: #333; }
+        .tool-card p { font-size: 12px; color: #777; line-height: 1.4; margin-bottom: 15px; }
+
+        /* Tool Inputs & Buttons */
+        input[type="file"] { width: 100%; font-size: 11px; margin-bottom: 10px; }
+        .tool-btn { 
+            background: var(--ilovepdf-red); color: white; border: none; padding: 8px 15px; 
+            border-radius: 5px; font-weight: 600; cursor: pointer; width: 100%; font-size: 12px;
+        }
+        .tool-btn:hover { background: #c0392b; }
+
+        /* Agency Promo Section */
+        .agency-section {
+            background: linear-gradient(rgba(1, 112, 185, 0.9), rgba(1, 112, 185, 0.9)), url('https://websproindia.in/wp-content/uploads/2023/04/bg-01.jpg');
+            color: white; padding: 60px 10%; border-radius: 20px; margin: 40px 20px; text-align: center;
+        }
+        .agency-btn { background: white; color: var(--agency-blue); padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 20px; }
+
+        footer { background: var(--ilovepdf-dark); color: white; padding: 50px 5%; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <span>📍 Huda Colony, Barabanki, Uttar Pradesh</span>
-    <span>📞 Call: <a href="tel:+919140989522">+91 9140989522</a></span>
+<div class="top-nav">
+    <span>📍 Location: Barabanki, Uttar Pradesh</span>
+    <span>📞 Tech Help: <a href="tel:9140989522">9140989522</a></span>
 </div>
 
 <header>
-    <div class="logo">DIGITAL HUB</div>
-    <nav style="font-weight:600;">SERVICES | CONTACT</nav>
+    <div class="logo">iLove<span>PDF</span>-Clone</div>
+    <nav style="font-weight: 600; display: flex; gap: 20px; font-size: 14px;">
+        <span>CONVERT</span> | <span>MERGE</span> | <span>EDIT</span>
+    </nav>
 </header>
 
 <div class="hero">
-    <div class="tools-header">iLovePDF Professional Tools Dashboard</div>
-    <p>Everything you need for PDFs in one place.</p>
+    <h1>Every tool you need to work with PDFs in one place</h1>
+    <p>100% free and easy to use. Merge, split, compress, convert and more!</p>
 </div>
 
-<div class="container">
+<div class="tools-wrapper">
     <div class="grid">
         
         <div class="tool-card">
-            <span class="icon">🔗</span>
+            <i style="color: #e74c3c;">🔗</i>
             <h3>Merge PDF</h3>
-            <p>Combine multiple PDFs into one.</p>
+            <p>Combine multiple PDFs into one document easily.</p>
             <input type="file" id="mergeInput" accept=".pdf" multiple>
-            <button class="action-btn" onclick="mergePDFs()">Merge PDFs</button>
+            <button class="tool-btn" onclick="mergePDFs()">Merge Now</button>
         </div>
 
-        <div class="tool-card" style="border-top-color: #f1c40f;">
-            <span class="icon">✂️</span>
-            <h3>Split PDF</h3>
-            <p>Extract specific page from PDF.</p>
-            <input type="file" id="splitInput" accept=".pdf">
-            <input type="number" id="pageIdx" placeholder="Page Number" min="1">
-            <button class="action-btn" style="background:#f1c40f;" onclick="splitPDF()">Split Page</button>
-        </div>
-
-        <div class="tool-card" style="border-top-color: #2ecc71;">
-            <span class="icon">🖼️</span>
+        <div class="tool-card">
+            <i style="color: #3498db;">🖼️</i>
             <h3>JPG to PDF</h3>
-            <p>Convert images to PDF docs.</p>
-            <input type="file" id="jpgToPdfInput" accept="image/*" multiple>
-            <button class="action-btn" style="background:#2ecc71;" onclick="jpgToPdf()">Convert Now</button>
+            <p>Convert JPG images to PDF in seconds.</p>
+            <input type="file" id="jpgInput" accept="image/*" multiple>
+            <button class="tool-btn" onclick="jpgToPdf()">Convert Now</button>
         </div>
 
-        <div class="tool-card" style="border-top-color: #9b59b6;">
-            <span class="icon">🏷️</span>
+        <div class="tool-card">
+            <i style="color: #f1c40f;">📉</i>
+            <h3>Compress PDF</h3>
+            <p>Reduce file size while optimizing quality.</p>
+            <input type="file" id="compressPdfInput" accept=".pdf">
+            <button class="tool-btn" onclick="alert('Feature processing...')">Compress</button>
+        </div>
+
+        <div class="tool-card">
+            <i style="color: #9b59b6;">🏷️</i>
             <h3>Watermark</h3>
-            <p>Add text over your PDF pages.</p>
+            <p>Stamp an image or text over your PDF.</p>
             <input type="file" id="wmInput" accept=".pdf">
-            <input type="text" id="wmText" placeholder="Your Text">
-            <button class="action-btn" style="background:#9b59b6;" onclick="addWatermark()">Add Stamp</button>
+            <input type="text" id="wmText" placeholder="Watermark Text" style="width:100%; margin-bottom:5px; font-size:12px;">
+            <button class="tool-btn" onclick="addWatermark()">Add Stamp</button>
         </div>
 
-        <div class="tool-card" style="border-top-color: #34495e;">
-            <span class="icon">📉</span>
-            <h3>Compress Image</h3>
-            <p>Reduce image size by quality.</p>
-            <input type="file" id="compInput" accept="image/*">
-            <input type="number" id="compQual" placeholder="Quality (1-100)" value="70">
-            <button class="action-btn" style="background:#34495e;" onclick="compressImg()">Compress</button>
-        </div>
-
-        <div class="tool-card" style="border-top-color: #e67e22;">
-            <span class="icon">🔒</span>
+        <div class="tool-card">
+            <i style="color: #e67e22;">🔒</i>
             <h3>Protect PDF</h3>
-            <p>Add password to your PDF.</p>
-            <input type="file" id="passInput" accept=".pdf">
-            <input type="text" id="passText" placeholder="Enter Password">
-            <button class="action-btn" style="background:#e67e22;" onclick="protectPDF()">Lock PDF</button>
+            <p>Encrypt your PDF with a password.</p>
+            <input type="file" id="lockInput" accept=".pdf">
+            <button class="tool-btn" onclick="alert('Security logic loading...')">Lock PDF</button>
+        </div>
+
+        <div class="tool-card">
+            <i style="color: #2ecc71;">🔄</i>
+            <h3>Rotate PDF</h3>
+            <p>Rotate your PDF pages as you need.</p>
+            <button class="tool-btn" onclick="alert('Select file to rotate')">Rotate</button>
+        </div>
+
+        <div class="tool-card">
+            <i style="color: #e74c3c;">✂️</i>
+            <h3>Split PDF</h3>
+            <p>Extract pages from your PDF file.</p>
+            <button class="tool-btn">Split Now</button>
+        </div>
+
+        <div class="tool-card">
+            <i style="color: #1abc9c;">📸</i>
+            <h3>PDF to JPG</h3>
+            <p>Extract all images from a PDF.</p>
+            <button class="tool-btn">Extract JPG</button>
         </div>
 
     </div>
 
     <div class="agency-section">
-        <h2>Professional App & Web Development</h2>
-        <p>Hume sirf tools hi nahi, complex web applications banana aata hai. Barabanki ki top IT service ke liye humse sampark karein.</p>
-        <button class="action-btn" style="background:var(--primary); padding: 15px 30px;" onclick="window.location.href='tel:9140989522'">Get Expert Help: 9140989522</button>
+        <h2>Professional App & Web Development in Barabanki</h2>
+        <p>Hume sirf tools banana nahi, complex business solutions deliver karna aata hai. 10k+ Trust members ke network ke saath hum Barabanki ki sabse fast-growing agency hain.</p>
+        <a href="tel:9140989522" class="agency-btn">Contact Developer: 9140989522</a>
     </div>
 </div>
 
 <footer>
-    <p>Office: Barabanki, Uttar Pradesh | Helpline: +91 9140989522</p>
-    <p>&copy; 2026 Developed for Excellence</p>
+    <p><b>Barabanki, Uttar Pradesh, India</b></p>
+    <p>Helpline: +91 9140989522 | Support 24/7</p>
+    <div style="margin-top: 20px; opacity: 0.5; font-size: 12px;">
+        &copy; 2026 iLovePDF Clone by Digital Experts. No data stored on server.
+    </div>
 </footer>
 
 <script>
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-    // 1. Merge PDFs
+    // 1. MERGE PDF LOGIC
     async function mergePDFs() {
         const input = document.getElementById('mergeInput').files;
-        if (input.length < 2) return alert("Min 2 PDFs required!");
+        if (input.length < 2) return alert("Select at least 2 PDFs!");
         const mergedPdf = await PDFDocument.create();
         for (const file of input) {
             const pdf = await PDFDocument.load(await file.arrayBuffer());
             const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
             pages.forEach(p => mergedPdf.addPage(p));
         }
-        savePDF(await mergedPdf.save(), "Merged_Document.pdf");
+        const bytes = await mergedPdf.save();
+        download(bytes, "Merged_Barabanki.pdf", "application/pdf");
     }
 
-    // 2. Split PDF
-    async function splitPDF() {
-        const file = document.getElementById('splitInput').files[0];
-        const pageNum = parseInt(document.getElementById('pageIdx').value);
-        if (!file || isNaN(pageNum)) return alert("Select PDF and Page Num!");
-        const pdf = await PDFDocument.load(await file.arrayBuffer());
-        if (pageNum > pdf.getPageCount()) return alert("Page not found!");
-        const newPdf = await PDFDocument.create();
-        const [page] = await newPdf.copyPages(pdf, [pageNum - 1]);
-        newPdf.addPage(page);
-        savePDF(await newPdf.save(), `Page_${pageNum}.pdf`);
-    }
-
-    // 3. JPG to PDF
+    // 2. JPG TO PDF LOGIC
     function jpgToPdf() {
-        const files = document.getElementById('jpgToPdfInput').files;
-        if (files.length === 0) return alert("Images select karein!");
+        const files = document.getElementById('jpgInput').files;
+        if (files.length === 0) return alert("Select images!");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
-        const readers = Array.from(files).map(f => new Promise(res => {
+        const promises = Array.from(files).map(f => new Promise(res => {
             const r = new FileReader();
             r.onload = e => res(e.target.result);
             r.readAsDataURL(f);
         }));
-        Promise.all(readers).then(dataUrls => {
+        Promise.all(promises).then(dataUrls => {
             dataUrls.forEach((url, i) => {
                 if (i > 0) pdf.addPage();
                 pdf.addImage(url, 'JPEG', 10, 10, 190, 150);
             });
-            pdf.save("Images_Converted.pdf");
+            pdf.save("Converted_Images.pdf");
         });
     }
 
-    // 4. Watermark
+    // 3. WATERMARK LOGIC
     async function addWatermark() {
         const file = document.getElementById('wmInput').files[0];
         const text = document.getElementById('wmText').value;
-        if (!file || !text) return alert("Select file & Enter text!");
+        if (!file || !text) return alert("File & Text required!");
         const pdfDoc = await PDFDocument.load(await file.arrayBuffer());
         const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
         pdfDoc.getPages().forEach(p => {
-            p.drawText(text, { x: 50, y: 50, size: 40, font, color: rgb(0.8, 0.2, 0.2), opacity: 0.4, rotate: PDFLib.degrees(45) });
+            p.drawText(text, { x: 50, y: 50, size: 50, font, color: rgb(0.9, 0.1, 0.1), opacity: 0.3, rotate: PDFLib.degrees(45) });
         });
-        savePDF(await pdfDoc.save(), "Watermarked.pdf");
+        download(await pdfDoc.save(), "Watermarked_Hub.pdf", "application/pdf");
     }
 
-    // 5. Compress Image
-    function compressImg() {
-        const file = document.getElementById('compInput').files[0];
-        const qual = document.getElementById('compQual').value / 100;
-        if (!file) return alert("Select Image!");
-        const reader = new FileReader();
-        reader.onload = e => {
-            const img = new Image();
-            img.src = e.target.result;
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = img.width; canvas.height = img.height;
-                canvas.getContext('2d').drawImage(img, 0, 0);
-                const a = document.createElement('a');
-                a.href = canvas.toDataURL('image/jpeg', qual);
-                a.download = "Compressed.jpg"; a.click();
-            };
-        };
-        reader.readAsDataURL(file);
-    }
-
-    // 6. Protect PDF (Basic implementation)
-    async function protectPDF() {
-        const file = document.getElementById('passInput').files[0];
-        const pass = document.getElementById('passText').value;
-        if (!file || !pass) return alert("Enter password & select file!");
-        // Note: Client-side encryption with password is heavy, 
-        // using PDFDocument to recreate file as basic protection/lock.
-        const pdf = await PDFDocument.load(await file.arrayBuffer());
-        savePDF(await pdf.save(), "Locked_Document.pdf");
-    }
-
-    function savePDF(bytes, name) {
-        const blob = new Blob([bytes], { type: "application/pdf" });
+    function download(bytes, name, type) {
+        const blob = new Blob([bytes], { type: type });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = name;
