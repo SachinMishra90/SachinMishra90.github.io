@@ -36,6 +36,19 @@
         .btn { padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; margin: 5px; color: white; }
         .btn-primary { background: var(--primary); }
         .btn-success { background: #10b981; }
+        <div class="image-compressor-tool">
+  <h2>Image Compressor (Target Size)</h2>
+  <input type="file" id="imageInput" accept="image/*">
+  
+  <label>Target Size (KB): 
+    <input type="number" id="targetSize" value="10" min="5" max="500">
+  </label>
+  
+  <button onclick="compressImage()">Compress Now</button>
+  
+  <div id="preview"></div>
+  <div id="result"></div>
+</div>
 
         /* AI Chat Window */
         #ai-chat-section { 
