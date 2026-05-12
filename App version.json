@@ -13,6 +13,7 @@
     }
   ]
 }
+{
 async function compressImage()
 {
   const fileInput = document.getElementById('imageInput');
