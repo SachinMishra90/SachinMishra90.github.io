@@ -13,7 +13,8 @@
     }
   ]
 }
-async function compressImage() {
+async function compressImage()
+{
   const fileInput = document.getElementById('imageInput');
   const targetKB = parseFloat(document.getElementById('targetSize').value);
   
@@ -37,7 +38,8 @@ async function compressImage() {
     let maxWidth = 1200;
 
     // Iterative compression to reach target size
-    while ((compressedFile.size / 1024) > targetKB && quality > 0.1) {
+    while ((compressedFile.size / 1024) > targetKB && quality > 0.1)
+    {
       const options = {
         maxSizeMB: targetKB / 1024,
         maxWidthOrHeight: maxWidth,
@@ -61,7 +63,9 @@ async function compressImage() {
       <a href="${url}" download="compressed-image.jpg">Download Compressed Image</a>
     `;
 
-  } catch (error) {
+  } 
+catch (error)
+{
     console.error(error);
     alert("Compression mein error aaya. Chhoti image try karo ya quality kam karo.");
   }
