@@ -1,73 +1,84 @@
-{
-  "name": "Sachin Tech Pro Video Editor",
-  "short_name": "SachinTech",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#00f2fe",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/711/711245.png",
-      "sizes": "512x512",
-      "type": "image/png"
+// ==================== IMAGE COMPRESSOR ====================
+
+async function startCompression() {
+    const fileInput = document.getElementById('imageInput');
+    const targetKB = parseFloat(document.getElementById('targetSize').value) || 10;
+    const resultDiv = document.getElementById('compression-result');
+
+    if (!fileInput.files || !fileInput.files[0]) {
+        alert("❌ Pehle image select karo!");
+        return;
     }
-  ]
+
+    const originalFile = fileInput.files[0];
+    const originalSize = (originalFile.size / 1024).toFixed(2);
+
+    resultDiv.innerHTML = `<p><b>Original:</b> ${originalSize} KB</p><p>Compressing... thoda time lag sakta hai</p>`;
+
+    try {
+        // Load library if not loaded
+        if (typeof imageCompression === "undefined") {
+            await loadImageCompressionLibrary();
+        }
+
+        let compressedFile = originalFile;
+        let quality = 0.8;
+        let maxWidth = 1400;
+
+        // Iterative Compression
+        while ((compressedFile.size / 1024) > targetKB && quality > 0.15) {
+            const options = {
+                maxSizeMB: (targetKB * 1.1) / 1024,   // thoda margin
+                maxWidthOrHeight: maxWidth,
+                useWebWorker: true,
+                quality: quality,
+                initialQuality: quality
+            };
+
+            compressedFile = await imageCompression(originalFile, options);
+
+            quality -= 0.07;
+            maxWidth = Math.floor(maxWidth * 0.93);
+        }
+
+        const finalSize = (compressedFile.size / 1024).toFixed(2);
+        const reduction = ((1 - compressedFile.size / originalFile.size) * 100).toFixed(1);
+
+        const imageUrl = URL.createObjectURL(compressedFile);
+
+        resultDiv.innerHTML = `
+            <h3>✅ Compression Ho Gayi!</h3>
+            <p><b>Original:</b> ${originalSize} KB</p>
+            <p><b>Compressed:</b> <strong>\( {finalSize} KB</strong> ( \){reduction}% reduced)</p>
+            
+            <img src="${imageUrl}" style="max-width: 100%; max-height: 400px; border-radius: 10px; margin: 15px 0;">
+            
+            <br><br>
+            <a href="${imageUrl}" download="compressed_sachintech.jpg" 
+               style="background:#00f2fe; color:black; padding:14px 24px; text-decoration:none; border-radius:8px; font-weight:bold;">
+               📥 Download Compressed Image
+            </a>
+        `;
+
+    } catch (error) {
+        console.error(error);
+        resultDiv.innerHTML = `<p style="color:red;">❌ Error: ${error.message || "Kuch problem hui hai"}</p>
+                               <p>Chhoti image try karo ya target size badha do.</p>`;
+    }
 }
-{
-async function compressImage()
-{
-  const fileInput = document.getElementById('imageInput');
-  const targetKB = parseFloat(document.getElementById('targetSize').value);
-  
-  if (!fileInput.files[0]) {
-    alert("Pehle image select karo!");
-    return;
-  }
 
-  const file = fileInput.files[0];
-  const originalSize = (file.size / 1024).toFixed(2);
+// Library Loader
+function loadImageCompressionLibrary() {
+    return new Promise((resolve, reject) => {
+        if (typeof imageCompression !== "undefined") {
+            resolve();
+            return;
+        }
 
-  // Show original info
-  document.getElementById('result').innerHTML = `Original Size: ${originalSize} KB`;
-
-  try {
-    // Pehle library load karo (CDN se)
-    // Ya phir direct vanilla canvas method bhi use kar sakte hain
-
-    let compressedFile = file;
-    let quality = 0.8;
-    let maxWidth = 1200;
-
-    // Iterative compression to reach target size
-    while ((compressedFile.size / 1024) > targetKB && quality > 0.1)
-    {
-      const options = {
-        maxSizeMB: targetKB / 1024,
-        maxWidthOrHeight: maxWidth,
-        useWebWorker: true,
-        quality: quality
-      };
-
-      compressedFile = await imageCompression(file, options);  // library use karega
-      quality -= 0.05;
-      maxWidth = Math.floor(maxWidth * 0.9);   // resize bhi karte jao
-    }
-
-    // Preview + Download
-    const url = URL.createObjectURL(compressedFile);
-    const finalSize = (compressedFile.size / 1024).toFixed(2);
-
-    document.getElementById('preview').innerHTML = `
-      <img src="${url}" width="300">
-      <p>Compressed Size: <strong>${finalSize} KB</strong> 
-         (${((1 - compressedFile.size/file.size)*100).toFixed(1)}% reduced)</p>
-      <a href="${url}" download="compressed-image.jpg">Download Compressed Image</a>
-    `;
-
-  } 
-catch (error)
-{
-    console.error(error);
-    alert("Compression mein error aaya. Chhoti image try karo ya quality kam karo.");
-  }
+        const script = document.createElement('script');
+        script.src = "https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.0/dist/browser-image-compression.js";
+        script.onload = resolve;
+        script.onerror = () => reject(new Error("Library load nahi hui"));
+        document.head.appendChild(script);
+    });
 }
