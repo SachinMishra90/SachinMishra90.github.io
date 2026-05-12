@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00f2fe">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker Registered'))
+      .catch(err => console.log('Service Worker Error:', err));
+  }
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Office Management | AI Utility Hub</title>
